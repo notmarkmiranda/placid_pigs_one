@@ -7,7 +7,7 @@ describe "Admin can delete league", type: :feature do
 
   before { login_as(user, scope: :user) }
 
-  it 'deletes league and redirects to dashboard path' do
+  it "deletes league and redirects to dashboard path" do
     visit league_path(league)
 
     click_button "Delete League"

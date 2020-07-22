@@ -8,7 +8,7 @@ describe "Admin can edit league name", type: :feature do
 
   before { login_as(user, scope: :user) }
 
-  it 'updates the league name and redirects to league path' do
+  it "updates the league name and redirects to league path" do
     visit edit_league_path(league)
 
     fill_in "League Name", with: new_name

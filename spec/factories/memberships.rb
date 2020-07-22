@@ -1,7 +1,7 @@
 FactoryBot.define do
   factory :membership do
-    user 
-    league 
+    user
+    league
     role { 0 }
   end
 end

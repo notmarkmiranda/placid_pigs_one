@@ -1,4 +1,4 @@
-require 'rails_helper'
+require "rails_helper"
 
 describe LeaguesController, type: :request do
   let(:user) { create(:user) }
@@ -6,18 +6,17 @@ describe LeaguesController, type: :request do
   let(:membership) { create(:membership, user: user, role: 1) }
   let!(:league) { membership.league }
 
-  describe 'GET#index' do
+  describe "GET#index" do
     subject(:get_index) { get leagues_path }
 
-    it 'has 200 status' do
+    it "has 200 status" do
       get_index
 
       expect(response).to have_http_status(200)
     end
   end
 
-  describe 'GET#show' do
-
+  describe "GET#show" do
     subject(:get_show) { get league_path(league) }
 
     it "has 200 status" do
@@ -41,7 +40,7 @@ describe LeaguesController, type: :request do
     subject(:post_create) { post leagues_path, params: league_attrs }
 
     describe "happy path" do
-      let(:league_attrs) { { league: attributes_for(:league) } }
+      let(:league_attrs) { {league: attributes_for(:league)} }
 
       it "has 302 status" do
         post_create
@@ -53,12 +52,12 @@ describe LeaguesController, type: :request do
         expect {
           post_create
         }.to change(League, :count).by(1)
-         .and change(Membership, :count).by(1)
+          .and change(Membership, :count).by(1)
       end
     end
 
     describe "sad path" do
-      let(:league_attrs) { { league: { name: '' } } }
+      let(:league_attrs) { {league: {name: ""}} }
 
       it "has 200 status" do
         post_create
@@ -84,43 +83,49 @@ describe LeaguesController, type: :request do
     end
   end
 
-  describe 'PUT#update' do
+  describe "PUT#update" do
     subject(:put_update) { put league_path(league), params: league_attrs }
 
-    describe 'happy path' do
-      let(:league_attrs) { { league: { name: 'new name' } } }
-      
-      it 'has 302 status' do
+    describe "happy path" do
+      let(:league_attrs) { {league: {name: "new name"}} }
+
+      it "has 302 status" do
         put_update
 
         expect(response).to have_http_status(302)
       end
 
-      it 'updates league name' do
+      it "updates league name" do
         expect {
           put_update
-        }.to change { league.reload; league.name }
+        }.to change {
+          league.reload
+          league.name
+        }
       end
     end
 
-    describe 'sad path' do
-      let(:league_attrs) { { league: { name: '' } } }
+    describe "sad path" do
+      let(:league_attrs) { {league: {name: ""}} }
 
-      it 'has 200 status' do
+      it "has 200 status" do
         put_update
 
         expect(response).to have_http_status(200)
       end
 
-      it 'does not update league name' do
+      it "does not update league name" do
         expect {
           put_update
-        }.not_to change { league.reload; league.name }
+        }.not_to change {
+          league.reload
+          league.name
+        }
       end
     end
   end
 
-  describe 'DELETE#destroy' do
+  describe "DELETE#destroy" do
     subject(:delete_destroy) { delete league_path(league) }
 
     it "has 302 status" do
