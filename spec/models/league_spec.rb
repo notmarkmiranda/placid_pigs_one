@@ -1,4 +1,4 @@
-require 'rails_helper'
+require "rails_helper"
 
 describe League, type: :model do
   describe "validations" do
@@ -10,6 +10,7 @@ describe League, type: :model do
 
   describe "relationships" do
     it { should belong_to :owner }
+    it { should have_many :memberships }
   end
 
   describe "methods"

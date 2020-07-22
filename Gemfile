@@ -15,6 +15,7 @@ gem "devise"
 gem "pundit"
 
 group :development, :test do
+  gem "capybara"
   gem "factory_bot_rails"
   gem "pry"
   gem "rspec-rails", "~> 4.0.1"
@@ -29,6 +30,7 @@ end
 
 group :test do
   gem "database_cleaner-active_record"
+  gem "launchy"
   gem "shoulda-matchers", "~> 4.0"
   gem "simplecov", require: false
 end
