@@ -11,7 +11,10 @@ gem "webpacker", "~> 4.0"
 gem "jbuilder", "~> 2.7"
 gem "bootsnap", ">= 1.4.2", require: false
 
+gem "devise"
+
 group :development, :test do
+  gem "factory_bot_rails"
   gem "pry"
   gem "rspec-rails", "~> 4.0.1"
   gem "standard"
