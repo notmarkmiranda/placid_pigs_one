@@ -1,6 +1,7 @@
 class League < ApplicationRecord
   belongs_to :owner, class_name: "User", foreign_key: "user_id"
   has_many :memberships, dependent: :destroy
+  has_many :seasons
 
   after_create_commit :create_admin_membership
 
