@@ -13,7 +13,7 @@ class SeasonsController < ApplicationController
   end
 
   def create
-    league = League.find(params[:league_id])
+    league = League.find(season_params[:league_id])
     @season = league.seasons.new(season_params)
     authorize @season
     if @season.save
@@ -49,6 +49,6 @@ class SeasonsController < ApplicationController
   private
 
   def season_params
-    params.require(:season).permit(:name, :active)
+    params.require(:season).permit(:name, :active, :league_id)
   end
 end

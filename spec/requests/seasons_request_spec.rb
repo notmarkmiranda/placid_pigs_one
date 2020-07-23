@@ -29,10 +29,10 @@ describe SeasonsController, type: :request do
   end
 
   describe "POST#create" do
-    subject(:post_create) { post seasons_path(league_id: league.id), params: season_attrs }
+    subject(:post_create) { post seasons_path, params: season_attrs }
 
     describe "happy path" do
-      let(:season_attrs) { { season: attributes_for(:season) } }
+      let(:season_attrs) { { season: attributes_for(:season).merge(league_id: league.id) } }
 
       it "has 302 status" do
         post_create
@@ -48,7 +48,7 @@ describe SeasonsController, type: :request do
     end
 
     describe "sad path" do
-      let(:season_attrs) { { season: { name: '' } } }
+      let(:season_attrs) { { season: { name: '', league_id: league.id } } }
 
       it "has 200 status" do
         post_create

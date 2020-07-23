@@ -1,0 +1,6 @@
+<%= form_for @season do |f| %>
+  <%= f.hidden_field :league_id, value: params[:league_id] %>
+  <%= f.label :name, "Season Name" %>
+  <%= f.text_field :name %>
+  <%= f.submit "Create Season" %>
+<% end %>
