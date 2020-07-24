@@ -11,6 +11,8 @@ describe "Admin can create new season", type: :feature do
     visit new_season_path(league_id: league.id)
 
     fill_in "Season Name", with: "Super Duper"
+    fill_in "Start Date", with: "09/05/2020"
+    fill_in "End Date", with: "10/05/2020"
     click_button "Create Season"
 
     expect(current_path).to eq(season_path(Season.last))

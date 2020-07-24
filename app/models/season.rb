@@ -3,4 +3,6 @@ class Season < ApplicationRecord
 
   validates_presence_of :name
   validates_uniqueness_of :name, scope: :league_id
+  validates_presence_of :start_date
+  validates_presence_of :end_date
 end
