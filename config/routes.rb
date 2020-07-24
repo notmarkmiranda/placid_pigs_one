@@ -7,4 +7,5 @@ Rails.application.routes.draw do
 
   resources :leagues
   resources :seasons, except: [:index]
+  resources :picks, only: [:create, :destroy]
 end
