@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_07_24_021804) do
+ActiveRecord::Schema.define(version: 2020_07_24_032057) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -31,6 +31,18 @@ ActiveRecord::Schema.define(version: 2020_07_24_021804) do
     t.datetime "updated_at", precision: 6, null: false
     t.index ["league_id"], name: "index_memberships_on_league_id"
     t.index ["user_id"], name: "index_memberships_on_user_id"
+  end
+
+  create_table "picks", force: :cascade do |t|
+    t.bigint "season_id", null: false
+    t.bigint "user_id", null: false
+    t.bigint "team_id", null: false
+    t.date "date"
+    t.datetime "created_at", precision: 6
+    t.datetime "updated_at", precision: 6
+    t.index ["season_id"], name: "index_picks_on_season_id"
+    t.index ["team_id"], name: "index_picks_on_team_id"
+    t.index ["user_id"], name: "index_picks_on_user_id"
   end
 
   create_table "seasons", force: :cascade do |t|
@@ -69,5 +81,8 @@ ActiveRecord::Schema.define(version: 2020_07_24_021804) do
   add_foreign_key "leagues", "users"
   add_foreign_key "memberships", "leagues"
   add_foreign_key "memberships", "users"
+  add_foreign_key "picks", "seasons"
+  add_foreign_key "picks", "teams"
+  add_foreign_key "picks", "users"
   add_foreign_key "seasons", "leagues"
 end
