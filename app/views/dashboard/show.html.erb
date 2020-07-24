@@ -1,0 +1,8 @@
+<%= link_to "New League", new_league_path %>
+
+<h3>Leagues</h3>
+<ul>
+<% current_user.user_leagues.each do |league| %>
+  <li><%= link_to league.name, league %></li>
+<% end %>
+</ul>
