@@ -32,7 +32,7 @@ describe SeasonsController, type: :request do
     subject(:post_create) { post seasons_path, params: season_attrs }
 
     describe "happy path" do
-      let(:season_attrs) { { season: attributes_for(:season).merge(league_id: league.id) } }
+      let(:season_attrs) { {season: attributes_for(:season).merge(league_id: league.id)} }
 
       it "has 302 status" do
         post_create
@@ -48,7 +48,7 @@ describe SeasonsController, type: :request do
     end
 
     describe "sad path" do
-      let(:season_attrs) { { season: { name: '', league_id: league.id } } }
+      let(:season_attrs) { {season: {name: "", league_id: league.id}} }
 
       it "has 200 status" do
         post_create
@@ -75,11 +75,11 @@ describe SeasonsController, type: :request do
   end
 
   describe "PUT#update" do
-    let(:season_attrs) { { season: { name: new_name } } }
+    let(:season_attrs) { {season: {name: new_name}} }
     subject(:put_update) { put season_path(season), params: season_attrs }
 
     describe "happy path" do
-      let(:new_name) { "#{SecureRandom.hex(2)}" }
+      let(:new_name) { SecureRandom.hex(2).to_s }
 
       it "has 302 status" do
         put_update
