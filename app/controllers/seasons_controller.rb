@@ -49,6 +49,6 @@ class SeasonsController < ApplicationController
   private
 
   def season_params
-    params.require(:season).permit(:name, :active, :league_id)
+    params.require(:season).permit(:name, :active, :league_id, :start_date, :end_date, :increment_lock, :offset)
   end
 end
