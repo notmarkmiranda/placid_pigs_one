@@ -2,9 +2,10 @@ class SeasonsController < ApplicationController
   before_action :authenticate_user!
 
   def show
-    @season = Season.find(params[:id])
+    @season = Season.find(params[:id]).decorate
     authorize @season
-  end
+    @picks = current_user.picks.where(season_id: @season.id)
+  end 
 
   def new
     @league = League.find(params[:league_id])
