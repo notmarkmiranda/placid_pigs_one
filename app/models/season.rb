@@ -1,5 +1,6 @@
 class Season < ApplicationRecord
   belongs_to :league
+  has_many :game_weeks
 
   validates_presence_of :name
   validates_uniqueness_of :name, scope: :league_id

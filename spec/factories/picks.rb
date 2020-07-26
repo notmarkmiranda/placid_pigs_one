@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :pick do
-    season
+    game_week
     user
     team
     date { Date.new(2020, 7, 23) }

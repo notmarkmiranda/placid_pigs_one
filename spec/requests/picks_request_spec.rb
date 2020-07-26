@@ -5,6 +5,7 @@ describe PicksController, type: :request do
   let(:user) { membership.user }
   let(:league) { membership.league }
   let(:season) { create(:season, league: league) }
+  let(:game_week) { create(:game_week, season: season) }
   let(:team) { create(:team) }
 
   before { sign_in(user) }
@@ -13,7 +14,7 @@ describe PicksController, type: :request do
     subject(:post_create) { post picks_path, params: pick_attrs }
 
     describe "happy path" do
-      let(:pick_attrs) { {pick: attributes_for(:pick).merge(season_id: season.id, team_id: team.id)} }
+      let(:pick_attrs) { {pick: attributes_for(:pick).merge(game_week_id: game_week.id, team_id: team.id)} }
 
       it "has 302 status" do
         post_create
@@ -29,7 +30,7 @@ describe PicksController, type: :request do
     end
 
     describe "sad path" do
-      let(:pick_attrs) { {pick: {team_id: "", season_id: season.id}} }
+      let(:pick_attrs) { {pick: {team_id: "", game_week_id: game_week.id}} }
 
       it "has 302 status" do
         post_create
@@ -46,7 +47,7 @@ describe PicksController, type: :request do
   end
 
   describe "DELETE#destroy" do
-    let!(:pick) { create(:pick, season: season) }
+    let!(:pick) { create(:pick, game_week: game_week) }
     subject(:delete_destroy) { delete pick_path(pick) }
 
     it "has 302 status" do
