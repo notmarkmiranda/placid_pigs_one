@@ -7,4 +7,8 @@ class User < ApplicationRecord
   has_many :leagues
   has_many :memberships
   has_many :picks
+
+  def user_leagues
+    memberships.map(&:league)
+  end
 end

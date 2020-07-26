@@ -1,3 +1,38 @@
 <%= button_to "Delete Season", @season, method: :delete %>
-<%= @season.name %>
+<%= link_to "<< League", @season.league %>
+  <h3><%= @season.name %></h3>
+  <h4><%= @season.league.owner.email %>
+<ul>
+  <li>Start Date: <%= @season.formatted_start_date %></li>
+  <li>End Date: <%= @season.formatted_end_date %></li>
+  <li>Betting window: <%= @season.increment_lock %></li>
+  <li>Offset: <%= @season.offset %></li>
+</ul>
+
+<table>
+  <tr>
+    <td>Date</td>
+    <td>My Pick</td>
+  </tr>
+  <% @season.all_dates.each do |date| %>
+  <tr>
+    <td><%= date.strftime("%A, %B %e, %Y") %></td>
+    <% if @picks.by_date(date) %>
+      <td>
+        <%= @picks.by_date(date).team.full_name %>
+        <%= button_to "Delete Pick", @picks.by_date(date), method: :delete %>
+      </td>
+    <% else %>
+      <td>
+        <%= form_for Pick.new do |f| %>
+          <%= f.hidden_field :season_id, value: @season.id %>
+          <%= f.hidden_field :date, value: date %>
+          <%= f.collection_select( :team_id, Team.all, :id, :full_name, include_blank: true) %>
+          <%= f.submit %>
+        <% end %>
+      </td>
+    <% end %>
+  </tr>
+  <% end %>
+</table>
 

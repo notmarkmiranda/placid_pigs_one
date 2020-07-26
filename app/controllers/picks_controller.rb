@@ -10,7 +10,7 @@ class PicksController < ApplicationController
   end
 
   def destroy
-    pick = Pick.find(params[:id])  
+    pick = Pick.find(params[:id])
     season = pick.season
     pick.destroy!
     redirect_to season

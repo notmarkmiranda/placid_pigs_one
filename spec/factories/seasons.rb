@@ -3,9 +3,9 @@ FactoryBot.define do
     sequence :name do |n|
       "Season#{n}"
     end
-    league 
+    league
     active { true }
-    start_date { Date.new(2015, 05, 9) }
-    end_date { Date.new(2020, 05, 9) }
+    start_date { Date.new(2015, 0o5, 9) }
+    end_date { Date.new(2020, 0o5, 9) }
   end
 end

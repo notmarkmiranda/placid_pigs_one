@@ -4,8 +4,8 @@ describe "Admin can edit season", type: :feature do
   let(:membership) { create(:membership, role: 1) }
   let(:user) { membership.user }
   let(:league) { membership.league }
-  let(:season) { create(:season, league: league) } 
-  let(:new_name) { "#{SecureRandom.hex(2)}" }
+  let(:season) { create(:season, league: league) }
+  let(:new_name) { SecureRandom.hex(2).to_s }
 
   before { login_as(user, scope: :user) }
 

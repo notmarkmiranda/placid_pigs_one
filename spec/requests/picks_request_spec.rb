@@ -1,4 +1,4 @@
-require 'rails_helper'
+require "rails_helper"
 
 describe PicksController, type: :request do
   let(:membership) { create(:membership) }
@@ -13,7 +13,7 @@ describe PicksController, type: :request do
     subject(:post_create) { post picks_path, params: pick_attrs }
 
     describe "happy path" do
-      let(:pick_attrs) { { pick: attributes_for(:pick).merge(season_id: season.id, team_id: team.id) } }
+      let(:pick_attrs) { {pick: attributes_for(:pick).merge(season_id: season.id, team_id: team.id)} }
 
       it "has 302 status" do
         post_create
@@ -29,7 +29,7 @@ describe PicksController, type: :request do
     end
 
     describe "sad path" do
-      let(:pick_attrs) { { pick: { team_id: '', season_id: season.id } } }
+      let(:pick_attrs) { {pick: {team_id: "", season_id: season.id}} }
 
       it "has 302 status" do
         post_create
@@ -51,7 +51,7 @@ describe PicksController, type: :request do
 
     it "has 302 status" do
       delete_destroy
-      
+
       expect(response).to have_http_status(302)
     end
 
