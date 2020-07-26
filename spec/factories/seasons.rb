@@ -5,7 +5,7 @@ FactoryBot.define do
     end
     league
     active { true }
-    start_date { Date.new(2015, 0o5, 9) }
-    end_date { Date.new(2020, 0o5, 9) }
+    start_date { Date.new(2020, 7, 27) }
+    end_date { Date.new(2020, 9, 27) }
   end
 end
