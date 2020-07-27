@@ -11,6 +11,7 @@ describe Pick, type: :model do
     before { create(:pick) }
 
     it { should validate_uniqueness_of(:game_week_id).scoped_to(:user_id, :date) }
+    it { should validate_uniqueness_of(:team_id).scoped_to(:user_id, :game_week_id) }
     it { should validate_presence_of(:date) }
   end
 

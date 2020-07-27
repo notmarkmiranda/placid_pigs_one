@@ -9,30 +9,40 @@
   <li>Offset: <%= @season.offset %></li>
 </ul>
 
-<table>
+<table border=1>
   <tr>
+    <td>Week #</td>
     <td>Date</td>
     <td>My Pick</td>
   </tr>
-  <% @season.all_dates.each do |date| %>
-  <tr>
-    <td><%= date.strftime("%A, %B %e, %Y") %></td>
-    <% if @picks.by_date(date) %>
-      <td>
-        <%= @picks.by_date(date).team.full_name %>
-        <%= button_to "Delete Pick", @picks.by_date(date), method: :delete %>
-      </td>
-    <% else %>
-      <td>
-        <%= form_for Pick.new do |f| %>
-          <%= f.hidden_field :season_id, value: @season.id %>
-          <%= f.hidden_field :date, value: date %>
-          <%= f.collection_select( :team_id, Team.all, :id, :full_name, include_blank: true) %>
-          <%= f.submit %>
+  <% @season.game_weeks.chronological.each_with_index do |week, index| %>
+    <tr>
+      <td rowspan=<%= week.rowspan %>><%= "#{index + 1}" %></td>
+    </tr>
+    <% week.all_dates.each do |date| %>
+      <tr>
+        <td><%= date.strftime("%A, %B %e, %Y") %></td>
+        <% if @picks.by_date(date) %>
+          <td>
+            <%= @picks.by_date(date).team.full_name %>
+            <%= button_to "Delete Pick", @picks.by_date(date), method: :delete, disabled: week.locked? %>
+          </td>
+        <% else %>
+          <td>
+            <% if week.locked? %>
+              The cutoff time has passed.
+            <% else %>
+              <%= form_for Pick.new do |f| %>
+                <%= f.hidden_field :game_week_id, value: week.id %>
+                <%= f.hidden_field :date, value: date %>
+                <%= f.collection_select( :team_id, Team.all, :id, :full_name, include_blank: true) %>
+                <%= f.submit %>
+              <% end %>
+            <% end %>
+          </td>
         <% end %>
-      </td>
+      </tr>
     <% end %>
-  </tr>
   <% end %>
 </table>
 
