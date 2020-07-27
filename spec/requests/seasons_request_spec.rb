@@ -32,7 +32,22 @@ describe SeasonsController, type: :request do
     subject(:post_create) { post seasons_path, params: season_attrs }
 
     describe "happy path" do
-      let(:season_attrs) { {season: attributes_for(:season).merge(league_id: league.id)} }
+      let(:start_date) { Date.new(2020, 7, 27) }
+      let(:end_date) { Date.new(2020, 9, 27) }
+      let(:offset) { 0 }
+
+      let(:season_attrs) do 
+        {
+          season: attributes_for(
+            :season, 
+            start_date: start_date, 
+            end_date: end_date,
+            offset: offset
+          ).merge(
+            league_id: league.id
+          )
+        } 
+      end
 
       it "has 302 status" do
         post_create
@@ -44,6 +59,20 @@ describe SeasonsController, type: :request do
         expect {
           post_create
         }.to change(Season, :count).by(1)
+          .and change(GameWeek, :count).by(9)
+      end
+
+      describe "with an offset" do
+        let(:start_date) { Date.new(2020, 7, 23) }
+        let(:end_date) { Date.new(2020, 9, 29) }
+        let(:offset) { 4 }
+
+        it "creates short weeks when it does not line up" do
+          expect {
+            post_create
+          }.to change(Season, :count).by(1)
+            .and change(GameWeek, :count).by(11)
+        end
       end
     end
 

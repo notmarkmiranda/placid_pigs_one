@@ -10,10 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_07_24_032057) do
+ActiveRecord::Schema.define(version: 2020_07_26_155648) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "game_weeks", force: :cascade do |t|
+    t.bigint "season_id", null: false
+    t.date "start_date"
+    t.date "end_date"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["season_id"], name: "index_game_weeks_on_season_id"
+  end
 
   create_table "leagues", force: :cascade do |t|
     t.string "name"
@@ -34,13 +43,13 @@ ActiveRecord::Schema.define(version: 2020_07_24_032057) do
   end
 
   create_table "picks", force: :cascade do |t|
-    t.bigint "season_id", null: false
     t.bigint "user_id", null: false
     t.bigint "team_id", null: false
     t.date "date"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["season_id"], name: "index_picks_on_season_id"
+    t.bigint "game_week_id", null: false
+    t.index ["game_week_id"], name: "index_picks_on_game_week_id"
     t.index ["team_id"], name: "index_picks_on_team_id"
     t.index ["user_id"], name: "index_picks_on_user_id"
   end
@@ -78,10 +87,11 @@ ActiveRecord::Schema.define(version: 2020_07_24_032057) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "game_weeks", "seasons"
   add_foreign_key "leagues", "users"
   add_foreign_key "memberships", "leagues"
   add_foreign_key "memberships", "users"
-  add_foreign_key "picks", "seasons"
+  add_foreign_key "picks", "game_weeks"
   add_foreign_key "picks", "teams"
   add_foreign_key "picks", "users"
   add_foreign_key "seasons", "leagues"

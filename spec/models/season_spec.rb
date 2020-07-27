@@ -11,6 +11,7 @@ describe Season, type: :model do
 
   describe "relationships" do
     it { should belong_to :league }
+    it { should have_many :game_weeks }
   end
 
   describe "methods"
