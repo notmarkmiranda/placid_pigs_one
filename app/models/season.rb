@@ -24,7 +24,7 @@ class Season < ApplicationRecord
       calculated_end = gw_start_date + (increment_lock - 1)
       gw_end_date = verified_end_date(calculated_end, end_date)
       game_weeks.create!(start_date: gw_start_date, end_date: gw_end_date)
-      break if calculated_end > end_date
+      break if calculated_end >= end_date
       n += 1
     end
   end
