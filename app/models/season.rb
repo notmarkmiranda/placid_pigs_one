@@ -13,6 +13,10 @@ class Season < ApplicationRecord
     (start_date..end_date).to_a
   end
 
+  def other_users(user_id)
+    league.memberships.where.not(user_id: user_id).map(&:user).sort_by { |u| u.email }
+  end
+
   private
 
   def create_game_weeks
