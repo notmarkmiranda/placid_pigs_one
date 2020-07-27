@@ -16,10 +16,8 @@ class Season < ApplicationRecord
   private
 
   def create_game_weeks
-    number_of_gws = (end_date - start_date + 1).to_i / increment_lock
     create_short_week if offset > 0
     adjusted_start_date = start_date + offset
-    #number_of_gws.times do |n|
     n = 0
     loop do
       gw_start_date = adjusted_start_date + increment_lock * n
