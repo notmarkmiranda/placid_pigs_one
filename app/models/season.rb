@@ -17,10 +17,25 @@ class Season < ApplicationRecord
 
   def create_game_weeks
     number_of_gws = (end_date - start_date + 1).to_i / increment_lock
-    number_of_gws.times do |n|
-      gw_start_date = start_date + increment_lock * n
-      gw_end_date = gw_start_date + (increment_lock - 1)
+    create_short_week if offset > 0
+    adjusted_start_date = start_date + offset
+    #number_of_gws.times do |n|
+    n = 0
+    loop do
+      gw_start_date = adjusted_start_date + increment_lock * n
+      calculated_end = gw_start_date + (increment_lock - 1)
+      gw_end_date = verified_end_date(calculated_end, end_date)
       game_weeks.create!(start_date: gw_start_date, end_date: gw_end_date)
+      break if calculated_end > end_date
+      n += 1
     end
+  end
+
+  def create_short_week
+    game_weeks.create(start_date: start_date, end_date: start_date + (offset - 1))
+  end
+
+  def verified_end_date(calculated_end_date, season_end_date)
+    calculated_end_date > season_end_date ? season_end_date : calculated_end_date
   end
 end

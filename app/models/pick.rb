@@ -10,5 +10,4 @@ class Pick < ApplicationRecord
   def self.by_date(date)
     find_by(date: date)
   end
-
 end
