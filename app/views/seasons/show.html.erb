@@ -1,7 +1,6 @@
 <%= button_to "Delete Season", @season, method: :delete %>
 <%= link_to "<< League", @season.league %>
   <h3><%= @season.name %></h3>
-  <h4><%= @season.league.owner.email %>
 <ul>
   <li>Start Date: <%= @season.formatted_start_date %></li>
   <li>End Date: <%= @season.formatted_end_date %></li>
@@ -14,6 +13,9 @@
     <td>Week #</td>
     <td>Date</td>
     <td>My Pick</td>
+    <% @season.other_users(current_user.id).each do |user| %>
+      <td><%= user.email %></td> 
+    <% end %>
   </tr>
   <% @season.game_weeks.chronological.each_with_index do |week, index| %>
     <tr>
@@ -22,13 +24,11 @@
     <% week.all_dates.each do |date| %>
       <tr>
         <td><%= date.strftime("%A, %B %e, %Y") %></td>
-        <% if @picks.by_date(date) %>
-          <td>
-            <%= @picks.by_date(date).team.full_name %>
-            <%= button_to "Delete Pick", @picks.by_date(date), method: :delete, disabled: week.locked? %>
-          </td>
+        <td><!-- this is the current_user's picks //-->
+        <% if @all_picks.by_date(date, current_user) %>
+            <%= @all_picks.by_date(date, current_user).team.full_name %>
+            <%= button_to "Delete Pick", @all_picks.by_date(date, current_user), method: :delete, disabled: week.locked? %>
         <% else %>
-          <td>
             <% if week.locked? %>
               The cutoff time has passed.
             <% else %>
@@ -39,8 +39,22 @@
                 <%= f.submit %>
               <% end %>
             <% end %>
-          </td>
         <% end %>
+        </td><!-- this is the current_user's picks //-->
+
+        <td><!-- this will be other users' picks //-->
+          <% if week.locked? %>
+            <% if @all_picks.by_date(date, @season.other_users(current_user.id).first) %>
+              <%= @all_picks.by_date(date, @season.other_users(current_user.id)).team.full_name %>
+            <% else %>
+              No pick
+            <% end %>
+          <% else %>
+              Other users' picks will be shown after the cutoff has passed
+          <% end %>
+          <%# if cutoff has passed, show the picks %>
+          <%# else show nothing? %>
+        </td><!-- this will be other users' picks //-->
       </tr>
     <% end %>
   <% end %>
