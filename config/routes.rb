@@ -8,4 +8,9 @@ Rails.application.routes.draw do
   resources :leagues
   resources :seasons, except: [:index]
   resources :picks, only: [:create, :destroy]
+
+  namespace :admin do
+    get "/winners", to: "winners#index", as: "winners"
+    post "/winners", to: "winners#create"
+  end
 end

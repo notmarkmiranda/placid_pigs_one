@@ -1,6 +1,10 @@
 require "rails_helper"
 
 describe Team, type: :model do
+  describe "relationships" do
+    it { should have_many :winners }
+  end
+
   describe "methods" do
     describe "#full_name" do
       let(:team) { Team.new(abbreviation: "LAD", city: "Los Angeles", name: "Dodgers") }

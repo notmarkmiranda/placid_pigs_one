@@ -24,11 +24,15 @@
     <% week.all_dates.each do |date| %>
       <tr>
         <td><%= date.strftime("%A, %B %e, %Y") %></td>
-        <td><!-- this is the current_user's picks //-->
-        <% if @all_picks.by_date(date, current_user) %>
+        <!-- this is the current_user's picks //-->
+        <% pick = @all_picks.by_date(date, current_user) %>
+        <% if pick %>
+          <td class="<%= pick.winner_css %>">
             <%= @all_picks.by_date(date, current_user).team.full_name %>
             <%= button_to "Delete Pick", @all_picks.by_date(date, current_user), method: :delete, disabled: week.locked? %>
+          </td>
         <% else %>
+          <td>
             <% if week.locked? %>
               The cutoff time has passed.
             <% else %>
@@ -39,22 +43,32 @@
                 <%= f.submit %>
               <% end %>
             <% end %>
+          </td>
         <% end %>
-        </td><!-- this is the current_user's picks //-->
+        <!-- this is the current_user's picks //-->
 
-        <td><!-- this will be other users' picks //-->
+        <!-- this will be other users' picks //-->
           <% if week.locked? %>
-            <% if @all_picks.by_date(date, @season.other_users(current_user.id).first) %>
-              <%= @all_picks.by_date(date, @season.other_users(current_user.id)).team.full_name %>
-            <% else %>
-              No pick
+            <% @season.other_users(current_user.id).each do |user| %>
+              <% pick = @all_picks.by_date(date, user) %>
+              <% if pick %>
+                <td class="<%= pick.winner_css %>">
+                  <%= pick.team.full_name %>
+                </td>
+              <% else %>
+                <td>
+                  No pick
+                </td>
+              <% end %>
             <% end %>
           <% else %>
+            <td>
               Other users' picks will be shown after the cutoff has passed
+            </td>
           <% end %>
           <%# if cutoff has passed, show the picks %>
           <%# else show nothing? %>
-        </td><!-- this will be other users' picks //-->
+        <!-- this will be other users' picks //-->
       </tr>
     <% end %>
   <% end %>
