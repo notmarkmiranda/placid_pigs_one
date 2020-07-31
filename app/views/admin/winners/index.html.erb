@@ -1,0 +1,19 @@
+Go To <a href="#<%= Date.today.strftime("%A, %B %e, %Y") %>">Today</a>
+<ul>
+<% @all_dates.each do |date| %>
+  <li>
+    <%= date.strftime("%A, %B %e, %Y") %>
+    <a name="<%= date.strftime("%A, %B %e, %Y") %>"></a>
+  </li>
+  <ul>
+    <% Team.all.each do |team| %>
+      <li>
+        <%= team.full_name %>
+        <%= button_to "Winner", admin_winners_path, method: :post, params: { winner: { team_id: team.id, date: date, status: :winner } }, disabled: @winners.exists_for_date?(team, date, :winner) %>
+        <%= button_to "Loser", admin_winners_path, method: :post, params: { winner: { team_id: team.id, date: date, status: :loser } }, disabled: @winners.exists_for_date?(team, date, :loser) %>
+        <%= button_to "No Status", admin_winners_path, method: :post, params: { winner: { team_id: team.id, date: date, status: :no_status } }, disabled: @winners.exists_for_date?(team, date, :no_status) %>
+      </li>
+  <% end %>
+  </ul>
+<% end %>
+</ul>

@@ -11,5 +11,6 @@ Rails.application.routes.draw do
 
   namespace :admin do
     get "/winners", to: "winners#index", as: "winners"
+    post "/winners", to: "winners#create"
   end
 end
