@@ -1,7 +1,9 @@
 <div class="container">
-  <%= button_to "Delete Season", @season, method: :delete %>
-  <%= link_to "<< League", @season.league %>
-    <h3><%= @season.name %></h3>
+  <div class="button-actions-row">
+    <%= link_to "<< League", @season.league, class: "button" %>
+    <%= button_to "Delete Season", @season, method: :delete %>
+  </div>
+  <h4><%= @season.name %></h4>
   <ul>
     <li>Start Date: <%= @season.formatted_start_date %></li>
     <li>End Date: <%= @season.formatted_end_date %></li>

@@ -3,9 +3,9 @@
     <%= button_to "Delete League", @league, method: :delete, class: "button" %>
     <%= link_to "New Season", new_season_path(league_id: @league.id), class: "button button-primary" %>
   </div>
-  <%= @league.name %>
+  <h4><%= @league.name %></h4>
 
-  <h3>Seasons</h3>
+  <h6>Seasons</h6>
   <ul>
   <% @league.seasons.each do |season| %>
     <li><%= link_to season.name, season %></li>
