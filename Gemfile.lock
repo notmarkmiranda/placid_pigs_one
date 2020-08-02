@@ -1,3 +1,9 @@
+GIT
+  remote: https://github.com/helios-technologies/skeleton-rails
+  revision: 6e46649d29006643b33c95b82bc9d0e28df2f8cc
+  specs:
+    skeleton-rails (1.1.0)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -290,6 +296,7 @@ DEPENDENCIES
   sass-rails (>= 6)
   shoulda-matchers (~> 4.0)
   simplecov
+  skeleton-rails!
   standard
   tzinfo-data
   web-console (>= 3.3.0)
