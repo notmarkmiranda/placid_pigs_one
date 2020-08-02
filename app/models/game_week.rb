@@ -9,7 +9,7 @@ class GameWeek < ApplicationRecord
   end
 
   def cutoff_time
-    start_date.yesterday.to_datetime.in_time_zone("America/Denver").change(hour: 20)
+    start_date.to_datetime.change(hour: 2).in_time_zone("America/Denver")
   end
 
 
