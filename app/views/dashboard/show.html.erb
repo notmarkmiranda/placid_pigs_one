@@ -1,8 +1,23 @@
-<%= link_to "New League", new_league_path %>
+<div class="container">
+  <%= link_to "New League", new_league_path, class: "button button-primary" %>
 
-<h3>Leagues</h3>
-<ul>
-<% current_user.user_leagues.each do |league| %>
-  <li><%= link_to league.name, league %></li>
-<% end %>
-</ul>
+  <h3>Leagues</h3>
+  <ul>
+    <table class="u-full-width">
+      <tr>
+        <th>League Name</th>
+        <th>Role</th>
+      </tr>
+      <% current_user.user_leagues.each do |league| %>
+        <tr>
+          <td>
+            <%= link_to league.name, league %>
+          </td>
+          <td>
+            <%= league.role_for_user(current_user) %>
+          </td>
+        </tr>
+      <% end %>
+    </table>
+  </ul>
+</div>
