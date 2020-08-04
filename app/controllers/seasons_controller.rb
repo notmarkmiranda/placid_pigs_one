@@ -4,7 +4,6 @@ class SeasonsController < ApplicationController
   def show
     @season = Season.find(params[:id]).decorate
     authorize @season
-    #@picks = current_user.picks.where(game_week_id: @season.game_weeks.map(&:id))
     @all_picks = Pick.where(game_week_id: @season.game_weeks.map(&:id))
   end 
 
