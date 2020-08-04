@@ -10,11 +10,11 @@ class SeasonPolicy < ApplicationPolicy
   end
 
   def new?
-    league.memberships.where(user: user, role: 1).any?
+    admin_or_super?
   end
 
   def create?
-    league.memberships.where(user: user, role: 1).any?
+    admin_or_super?
   end
 
   def edit?
@@ -22,16 +22,20 @@ class SeasonPolicy < ApplicationPolicy
   end
 
   def update?
-    league.memberships.where(user: user, role: 1).any?
+    admin_or_super?
   end
 
   def destroy?
-    league.memberships.where(user: user, role: 1).any?
+    admin_or_super?
   end
 
   private
 
   def league
     record&.league
+  end
+
+  def admin_or_super?
+    league.memberships.where(user: user, role: [1, 2]).any?
   end
 end

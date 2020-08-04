@@ -8,6 +8,10 @@ class League < ApplicationRecord
   validates_presence_of :name
   validates_uniqueness_of :name, case_sensitive: false
 
+  def role_for_user(user)
+    memberships.find_by(user: user).role
+  end
+
   private
 
   def create_admin_membership

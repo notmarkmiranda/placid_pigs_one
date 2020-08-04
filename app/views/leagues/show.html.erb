@@ -1,11 +1,23 @@
-<%= button_to "Delete League", @league, method: :delete %>
-<%= link_to "New Season", new_season_path(league_id: @league.id) %>
-<%= @league.name %>
-
-<h3>Seasons</h3>
-<ul>
-<% @league.seasons.each do |season| %>
-  <li><%= link_to season.name, season %></li>
-<% end %>
-</ul>
+<div class="container">
+  <div class="button-actions-row">
+    <%= button_to "Delete League", @league, method: :delete, class: "button", form_class: "delete-league" %>
+    <%= link_to "New Season", new_season_path(league_id: @league.id), class: "button button-primary" %>
+  </div>
+  <h4>League Name: <%= @league.name %></h4>
+  <h4>Seasons</h4>
+  <table class="u-full-width">
+    <tr>
+      <th>Season Name</th>
+      <th>Start Date</th>
+      <th>End Date</th>
+    </tr>
+  <% @league.seasons.each do |season| %>
+    <tr>
+      <td><%= link_to season.name, season %></td>
+      <td>YO</td>
+      <td>LO</td>
+    </tr>
+  <% end %>
+  </table>
+</div>
 

@@ -13,7 +13,9 @@ gem "bootsnap", ">= 1.4.2", require: false
 
 gem "devise"
 gem "draper"
+gem "font-awesome-rails"
 gem "pundit"
+gem 'skeleton-rails', :git => 'https://github.com/helios-technologies/skeleton-rails'
 
 group :development, :test do
   gem "capybara"

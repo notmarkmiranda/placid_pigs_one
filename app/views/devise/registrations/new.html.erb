@@ -1,0 +1,35 @@
+<div class="container">
+  <div class="row one-half-column">
+    <div class="one-half column">
+      <h4>Sign up</h4>
+
+      <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+        <%= render "devise/shared/error_messages", resource: resource %>
+
+        <div class="field">
+          <%= f.label :email %>
+          <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "u-full-width" %>
+        </div>
+
+        <div class="field">
+          <%= f.label :password %>
+          <%= f.password_field :password, autocomplete: "new-password", class: "u-full-width" %>
+          <% if @minimum_password_length %>
+            <div class="small">(<%= @minimum_password_length %> characters minimum)</div>
+          <% end %>
+        </div>
+
+        <div class="field">
+          <%= f.label :password_confirmation %>
+          <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "u-full-width" %>
+        </div>
+
+        <div class="actions">
+          <%= f.submit "Sign up", class: "u-full-width" %>
+        </div>
+      <% end %>
+
+      <%= render "devise/shared/links" %>
+    </div>
+  </div>
+</div>

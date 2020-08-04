@@ -1,76 +1,89 @@
-<%= button_to "Delete Season", @season, method: :delete %>
-<%= link_to "<< League", @season.league %>
-  <h3><%= @season.name %></h3>
-<ul>
-  <li>Start Date: <%= @season.formatted_start_date %></li>
-  <li>End Date: <%= @season.formatted_end_date %></li>
-  <li>Betting window: <%= @season.increment_lock %></li>
-  <li>Offset: <%= @season.offset %></li>
-</ul>
+<div class="container">
+  <div class="button-actions-row">
+    <%= link_to "<< League", @season.league, class: "button" %>
+    <%= button_to "Delete Season", @season, method: :delete %>
+  </div>
+  <h4><%= @season.name %></h4>
+  <ul>
+    <li>Start Date: <%= @season.formatted_start_date %></li>
+    <li>End Date: <%= @season.formatted_end_date %></li>
+    <li>Betting window: <%= @season.increment_lock %></li>
+    <li>Offset: <%= @season.offset %></li>
+  </ul>
 
-<table border=1>
-  <tr>
-    <td>Week #</td>
-    <td>Date</td>
-    <td>My Pick</td>
-    <% @season.other_users(current_user.id).each do |user| %>
-      <td><%= user.email %></td> 
-    <% end %>
-  </tr>
-  <% @season.game_weeks.chronological.each_with_index do |week, index| %>
+  <table>
     <tr>
-      <td rowspan=<%= week.rowspan %>><%= "#{index + 1}" %></td>
+      <td class="nowrap">Week #</td>
+      <td>Date</td>
+      <td>My Pick</td>
+      <% @season.other_users(current_user.id).each do |user| %>
+        <td><%= user.email %></td> 
+      <% end %>
     </tr>
-    <% week.all_dates.each do |date| %>
+    <% @season.game_weeks.chronological.each_with_index do |week, index| %>
       <tr>
-        <td><%= date.strftime("%A, %B %e, %Y") %></td>
-        <!-- this is the current_user's picks //-->
-        <% pick = @all_picks.by_date(date, current_user) %>
-        <% if pick %>
-          <td class="<%= pick.winner_css %>">
-            <%= @all_picks.by_date(date, current_user).team.full_name %>
-            <%= button_to "Delete Pick", @all_picks.by_date(date, current_user), method: :delete, disabled: week.locked? %>
+        <td rowspan=<%= week.rowspan %>><%= "#{index + 1}" %></td>
+      </tr>
+      <% week.all_dates.each do |date| %>
+        <tr>
+          <td class="nowrap">
+            <% formatted_date = date.strftime("%A, %B %e, %Y") %>
+            <a name="<%= formatted_date.parameterize.underscore %>"><%= formatted_date %></a>
           </td>
-        <% else %>
-          <td>
-            <% if week.locked? %>
-              The cutoff time has passed.
-            <% else %>
-              <%= form_for Pick.new do |f| %>
-                <%= f.hidden_field :game_week_id, value: week.id %>
-                <%= f.hidden_field :date, value: date %>
-                <%= f.collection_select( :team_id, Team.all, :id, :full_name, include_blank: true) %>
-                <%= f.submit %>
+          <!-- this is the current_user's picks //-->
+          <% pick = @all_picks.by_date(date, current_user) %>
+          <% if pick %>
+            <td class="<%= pick.winner_css %> existing_pick nowrap">
+              <span><%= @all_picks.by_date(date, current_user).team.full_name %></span>
+              <% unless week.locked? %>
+                <%= button_to @all_picks.by_date(date, current_user), method: :delete, class: "button-secondary", form_class: "delete_pick" do %>
+                  <%= fa_icon "times" %>
+                <% end %>
               <% end %>
-            <% end %>
-          </td>
-        <% end %>
-        <!-- this is the current_user's picks //-->
-
-        <!-- this will be other users' picks //-->
-          <% if week.locked? %>
-            <% @season.other_users(current_user.id).each do |user| %>
-              <% pick = @all_picks.by_date(date, user) %>
-              <% if pick %>
-                <td class="<%= pick.winner_css %>">
-                  <%= pick.team.full_name %>
+            </td>
+          <% else %>
+              <% if week.locked? %>
+                <td>
+                  The cutoff time has passed.
                 </td>
               <% else %>
-                <td>
-                  No pick
+                <td class="new-pick">
+                  <%= form_for Pick.new do |f| %>
+                    <%= f.hidden_field :game_week_id, value: week.id %>
+                    <%= f.hidden_field :date, value: date %>
+                    <%= f.collection_select( :team_id, Team.all, :id, :full_name, include_blank: true) %>
+                    <%= button_tag class: "button button-primary" do %>
+                      <%= fa_icon "check" %>
+                    <% end %>
+                    <%# f.submit %>
+                  <% end %>
                 </td>
               <% end %>
-            <% end %>
-          <% else %>
-            <td>
-              Other users' picks will be shown after the cutoff has passed
-            </td>
           <% end %>
-          <%# if cutoff has passed, show the picks %>
-          <%# else show nothing? %>
-        <!-- this will be other users' picks //-->
-      </tr>
-    <% end %>
-  <% end %>
-</table>
+          <!-- this is the current_user's picks //-->
 
+          <!-- this will be other users' picks //-->
+            <% if week.locked? %>
+              <% @season.other_users(current_user.id).each do |user| %>
+                <% pick = @all_picks.by_date(date, user) %>
+                <% if pick %>
+                  <td class="<%= pick.winner_css %> nowrap">
+                    <%= pick.team.full_name %>
+                  </td>
+                <% else %>
+                  <td>
+                    No pick
+                  </td>
+                <% end %>
+              <% end %>
+            <% else %>
+              <td class="nowrap">
+                Other users' picks will be shown after the cutoff has passed
+              </td>
+            <% end %>
+          <!-- this will be other users' picks //-->
+        </tr>
+      <% end %>
+    <% end %>
+  </table>
+</div>

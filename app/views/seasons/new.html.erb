@@ -1,14 +1,32 @@
-<%= form_for @season do |f| %>
-  <%= f.hidden_field :league_id, value: params[:league_id] %>
-  <%= f.label :name, "Season Name" %>
-  <%= f.text_field :name %>
-  <%= f.label :start_date, "Start Date" %>
-  <%= f.date_field :start_date %>
-  <%= f.label :end_date, "End Date" %>
-  <%= f.date_field :end_date %>
-  <%= f.label :increment_lock, "Days in Betting Window" %>
-  <%= f.text_field :increment_lock %>
-  <%= f.label :offset %>
-  <%= f.text_field :offset %>
-  <%= f.submit "Create Season" %>
-<% end %>
+<div class="container">
+  <div class="row one-half-column">
+    <div class="one-half column">
+      <%= form_for @season do |f| %>
+        <%= f.hidden_field :league_id, value: params[:league_id] %>
+        <div class="field">
+            <%= f.label :name, "Season Name" %>
+            <%= f.text_field :name, class: "u-full-width" %>
+        </div>
+        <div class="field">
+          <%= f.label :start_date, "Start Date" %>
+          <%= f.date_field :start_date, class: "u-full-width" %>
+        </div>
+        <div class="field">
+          <%= f.label :end_date, "End Date" %>
+          <%= f.date_field :end_date, class: "u-full-width" %>
+        </div>
+        <div class="field">
+          <%= f.label :increment_lock, "Days in Betting Window" %>
+          <%= f.text_field :increment_lock, class: "u-full-width" %>
+        </div>
+        <div class="field">
+          <%= f.label :offset %>
+          <%= f.text_field :offset, class: "u-full-width" %>
+        </div>
+        <div class="actions">
+          <%= f.submit "Create Season", class: "u-full-width" %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
