@@ -6,7 +6,8 @@ class PicksController < ApplicationController
     @pick = current_user.picks.new(pick_params)
     authorize @pick
     @pick.save
-    redirect_to @pick.season
+    anchor = @pick.date&.strftime("%A, %B %e, %Y")&.parameterize&.underscore
+    redirect_to season_path(@pick.season, anchor: anchor)
   end
 
   def destroy

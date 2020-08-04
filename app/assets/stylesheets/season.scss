@@ -4,6 +4,44 @@
 }
 
 .loser {
-  background: red;
+  background: #d20000;
   color: white;
+}
+
+form.new_pick, form.delete_pick {
+  display: flex;
+  flex-direction: row;
+  margin: 0px;
+
+  & > #pick_team_id {
+    margin-right: 15px;
+  }
+}
+
+td.new-pick, td.existing_pick {
+  display: flex; 
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: baseline;
+
+  & > span {
+    margin-right: 15px;
+  }
+}
+
+
+td.nowrap {
+  white-space: nowrap;
+}
+
+button.button-secondary {
+  background: red; 
+  outline-color: red;
+  color: white;
+
+  &:hover {
+    background: #d20000;
+    outline-color: #d20000;
+    color: white;
+  }
 }
