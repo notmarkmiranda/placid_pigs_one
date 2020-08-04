@@ -15,6 +15,7 @@ gem "devise"
 gem "draper"
 gem "font-awesome-rails"
 gem "pundit"
+gem "sidekiq"
 gem 'skeleton-rails', :git => 'https://github.com/helios-technologies/skeleton-rails'
 
 group :development, :test do
