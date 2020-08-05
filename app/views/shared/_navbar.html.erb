@@ -3,6 +3,9 @@
     <div class="title">MLB PICK-A-WINNER</div>
     <% if current_user %>
       <div>
+        <% if current_user.superadmin? %>
+          <%= link_to "admin dashboard", admin_winners_path, class: "button button-primary" %>
+        <% end %>
         <%= link_to "dashboard", dashboard_path, class: "button" %>
         <%= link_to "log out", destroy_user_session_path, method: :delete, class: "button" %>
       </div>
