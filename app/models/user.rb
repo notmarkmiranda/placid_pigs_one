@@ -11,4 +11,8 @@ class User < ApplicationRecord
   def user_leagues
     memberships.map(&:league)
   end
+
+  def superadmin?
+    memberships.where(role: :superadmin).any?
+  end
 end
