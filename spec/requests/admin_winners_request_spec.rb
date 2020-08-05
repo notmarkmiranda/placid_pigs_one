@@ -21,10 +21,15 @@ describe Admin::WinnersController, type: :request do
     let(:winner_attrs) { { winner: attributes_for(:winner).merge(team_id: team.id) } }
     subject(:post_create) { post admin_winners_path, params: winner_attrs }
 
+    before do
+      allow(WinnerPicksJob).to receive(:perform_later).and_call_original
+    end
+
     it "has 302 status" do
       post_create
 
       expect(response).to have_http_status(302)
+      expect(WinnerPicksJob).to have_received(:perform_later).once
     end
 
     it "creates a new winner" do

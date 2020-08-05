@@ -10,9 +10,12 @@ describe Pick, type: :model do
   describe "validations" do
     before { create(:pick) }
 
+    let(:enum_values) { [:no_status, :winner, :loser] }
+
     it { should validate_uniqueness_of(:game_week_id).scoped_to(:user_id, :date) }
     it { should validate_uniqueness_of(:team_id).scoped_to(:user_id, :game_week_id) }
     it { should validate_presence_of(:date) }
+    it { should define_enum_for(:status).with_values(enum_values) }
   end
 
   describe "methods"
