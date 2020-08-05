@@ -11,7 +11,7 @@ class Admin::WinnersController < ApplicationController
   def create
     @winner = Winner.find_or_initialize_by(date: winner_params[:date], team_id: winner_params[:team_id])
     @winner.status = winner_params[:status]
-    @winner.save
+    WinnerPicksJob.perform_now(@winner) if @winner.save
     redirect_to admin_winners_path
   end
 
