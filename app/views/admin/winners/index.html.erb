@@ -1,9 +1,10 @@
-Go To <a href="#<%= Date.today.strftime("%A, %B %e, %Y") %>">Today</a>
+Go To <a href="#<%= formatted_date_with_day(Date.today) %>">Today</a>
+
 <ul>
 <% @all_dates.each do |date| %>
   <li>
-    <%= date.strftime("%A, %B %e, %Y") %>
-    <a name="<%= date.strftime("%A, %B %e, %Y") %>"></a>
+    <%= formatted_date_with_day(date) %>
+    <a name="<%= formatted_date_with_day(date) %>"></a>
   </li>
   <ul>
     <% Team.all.each do |team| %>

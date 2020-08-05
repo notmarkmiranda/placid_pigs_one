@@ -1,4 +1,6 @@
 class SeasonDecorator < ApplicationDecorator
+  include DateHelper
+
   delegate_all
 
   def formatted_start_date
@@ -7,11 +9,5 @@ class SeasonDecorator < ApplicationDecorator
 
   def formatted_end_date
     formatted_date(end_date)
-  end
-
-  private
-
-  def formatted_date(date)
-    date.strftime("%B %e, %Y")
   end
 end
