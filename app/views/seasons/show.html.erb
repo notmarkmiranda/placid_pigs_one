@@ -1,7 +1,9 @@
 <div class="container">
   <div class="button-actions-row">
     <%= link_to "<< League", @season.league, class: "button" %>
-    <%= button_to "Delete Season", @season, method: :delete %>
+    <% if policy(@season).destroy? %>
+      <%= button_to "Delete Season", @season, method: :delete %>
+    <% end %>
   </div>
   <h4><%= @season.name %></h4>
   <ul>
@@ -15,7 +17,7 @@
     <%= link_to "View Everyone's Picks", season_path(@season, show_all: true), class: "button" %>
   <% end %>
 
-  <table>
+  <table class="u-full-width">
     <tr>
       <td class="nowrap">Week #</td>
       <td>Date</td>
