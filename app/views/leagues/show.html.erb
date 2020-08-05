@@ -14,11 +14,11 @@
       <th>End Date</th>
       <th>Days in Season</th>
     </tr>
-  <% @league.seasons.each do |season| %>
+  <% @league.seasons.decorate.each do |season| %>
     <tr>
       <td><%= link_to season.name, season %></td>
-      <td><%= formatted_date(season.start_date) %></td>
-      <td><%= formatted_date(season.end_date) %></td>
+      <td><%= season.formatted_start_date %></td>
+      <td><%= season.formatted_end_date %></td>
       <td><%= season_days(season) %></td>
     </tr>
   <% end %>

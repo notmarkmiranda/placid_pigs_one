@@ -35,7 +35,7 @@
       <% week.all_dates.each do |date| %>
         <tr>
           <td class="nowrap">
-            <% formatted_date = date.strftime("%A, %B %e, %Y") %>
+            <% formatted_date = formatted_date_with_day(date) %>
             <a name="<%= formatted_date.parameterize.underscore %>"><%= formatted_date %></a>
           </td>
           <!-- this is the current_user's picks //-->

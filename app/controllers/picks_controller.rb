@@ -1,4 +1,6 @@
 class PicksController < ApplicationController
+  include DateHelper
+
   before_action :authenticate_user!
 
   def create
@@ -6,7 +8,7 @@ class PicksController < ApplicationController
     @pick = current_user.picks.new(pick_params)
     authorize @pick
     @pick.save
-    anchor = @pick.date&.strftime("%A, %B %e, %Y")&.parameterize&.underscore
+    anchor = formatted_date_with_day(@pick.date)&.parameterize&.underscore
     redirect_to season_path(@pick.season, anchor: anchor)
   end
 

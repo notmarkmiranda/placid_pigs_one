@@ -1,10 +1,10 @@
 module DateHelper
   def formatted_date_with_day(date)
-    date.strftime("%A, %B %e, %Y")
+    date&.strftime("%A, %B %e, %Y")
   end
 
   def formatted_date(date)
-    date.strftime("%B %e, %Y")
+    date&.strftime("%B %e, %Y")
   end
 
   def season_days(season)
