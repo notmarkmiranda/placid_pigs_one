@@ -20,4 +20,10 @@ class GameWeek < ApplicationRecord
   def rowspan
     (end_date - start_date + 2).to_i
   end
+
+  def self.by_date(season, date)
+    gws = season.game_weeks.where("start_date <= ? AND end_date >= ?", date, date)
+    return unless gws.one?
+    gws.first
+  end
 end
