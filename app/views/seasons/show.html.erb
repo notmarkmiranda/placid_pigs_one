@@ -13,9 +13,13 @@
     <li>Offset: <%= @season.offset %></li>
   </ul>
 
+  <div class="button-actions-row">
   <% if params[:show_all] != "true" %>
     <%= link_to "View Everyone's Picks", season_path(@season, show_all: true), class: "button" %>
+  <% else %>
+    <%= link_to "Just My Picks", season_path(@season), class: "button" %>
   <% end %>
+  </div>
 
   <table class="u-full-width">
     <tr>
@@ -87,7 +91,7 @@
               <% end %>
             <% else %>
               <td class="nowrap">
-                Other users' picks will be shown after the cutoff has passed
+                &nbsp;
               </td>
             <% end %>
           <% end %>
