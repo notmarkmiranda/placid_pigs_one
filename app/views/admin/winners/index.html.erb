@@ -1,20 +1,31 @@
-Go To <a href="#<%= formatted_date_with_day(Date.today) %>">Today</a>
+<div class="container">
+  <a href="#<%= formatted_date_with_day(Date.today) %>", class="button">Today</a>
 
-<ul>
-<% @all_dates.each do |date| %>
-  <li>
-    <%= formatted_date_with_day(date) %>
-    <a name="<%= formatted_date_with_day(date) %>"></a>
-  </li>
-  <ul>
-    <% Team.all.each do |team| %>
-      <li>
-        <%= team.full_name %>
-        <%= button_to "Winner", admin_winners_path, method: :post, params: { winner: { team_id: team.id, date: date, status: :winner } }, disabled: @winners.exists_for_date?(team, date, :winner) %>
-        <%= button_to "Loser", admin_winners_path, method: :post, params: { winner: { team_id: team.id, date: date, status: :loser } }, disabled: @winners.exists_for_date?(team, date, :loser) %>
-        <%= button_to "No Status", admin_winners_path, method: :post, params: { winner: { team_id: team.id, date: date, status: :no_status } }, disabled: @winners.exists_for_date?(team, date, :no_status) %>
-      </li>
-  <% end %>
-  </ul>
-<% end %>
-</ul>
+  <table class="u-full-width">
+    <tr>
+      <th>Date</th>
+      <td>Team</td>
+    </tr>
+    <% @all_dates.each do |date| %> 
+      <tr>
+        <td rowspan=31>
+          <a name="<%= formatted_date_with_day(date) %>">
+            <%= formatted_date_with_day(date) %>
+          </a>
+        </td>
+      </tr>
+      <% Team.all.each do |team| %>
+      <tr>
+        <td class="team-cell">
+          <%= team.full_name %>
+          <div class="team-cell-buttons">
+            <%= button_to "W", admin_winners_path, method: :post, params: { winner: { team_id: team.id, date: date, status: :winner } }, disabled: @winners.exists_for_date?(team, date, :winner) %>
+            <%= button_to "L", admin_winners_path, method: :post, params: { winner: { team_id: team.id, date: date, status: :loser } }, disabled: @winners.exists_for_date?(team, date, :loser) %>
+            <%= button_to "X", admin_winners_path, method: :post, params: { winner: { team_id: team.id, date: date, status: :no_status } }, disabled: @winners.exists_for_date?(team, date, :no_status) %>
+          </div>
+        </td>
+      </tr>
+      <% end %>
+    <% end %>
+  </table>
+</div>

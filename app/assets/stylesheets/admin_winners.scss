@@ -1,0 +1,19 @@
+.team-cell {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.team-cell-buttons {
+  display: flex;
+  flex-direction: row;
+  
+  & > form {
+    margin: 0px 5px;
+
+    & > input {
+      margin: 0px;
+    }
+  }
+}
