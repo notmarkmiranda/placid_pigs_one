@@ -19,8 +19,8 @@
         <td class="team-cell">
           <%= team.full_name %>
           <div class="team-cell-buttons">
-            <%= button_to "W", admin_winners_path, method: :post, params: { winner: { team_id: team.id, date: date, status: :winner } }, disabled: @winners.exists_for_date?(team, date, :winner) %>
-            <%= button_to "L", admin_winners_path, method: :post, params: { winner: { team_id: team.id, date: date, status: :loser } }, disabled: @winners.exists_for_date?(team, date, :loser) %>
+            <%= button_to "W", admin_winners_path, method: :post, params: { winner: { team_id: team.id, date: date, status: :winner } }, class: 'button button-primary', disabled: @winners.exists_for_date?(team, date, :winner) %>
+            <%= button_to "L", admin_winners_path, method: :post, params: { winner: { team_id: team.id, date: date, status: :loser } }, class:'button button-loser', disabled: @winners.exists_for_date?(team, date, :loser) %>
             <%= button_to "X", admin_winners_path, method: :post, params: { winner: { team_id: team.id, date: date, status: :no_status } }, disabled: @winners.exists_for_date?(team, date, :no_status) %>
           </div>
         </td>
