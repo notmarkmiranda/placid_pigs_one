@@ -1,6 +1,7 @@
 .button-actions-row {
   display: flex;
   flex-direction: row;
+  margin-bottom: 10px;
   & > form, & > a {
     margin-right: 10px;
   }

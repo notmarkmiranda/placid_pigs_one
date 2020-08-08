@@ -18,6 +18,6 @@ class LeaguePolicy < ApplicationPolicy
   end
 
   def destroy?
-    record.memberships.where(user: user, role: 1).any?
+    record.memberships.where(user: user, role: [1, 2]).any?
   end
 end

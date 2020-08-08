@@ -1,19 +1,33 @@
-<div class="container">
-  <div class="nav-bar-container">
-    <div class="title">MLB PICK-A-WINNER</div>
-    <% if current_user %>
-      <div>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <div class="container">
+    <a class="navbar-brand" href="#">MLB PICK-A-WINNER</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+      <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
+      <% if current_user %>
         <% if current_user.superadmin? %>
-          <%= link_to "admin dashboard", admin_winners_path, class: "button button-primary" %>
+          <li class="nav-item">
+            <%= link_to "admin", admin_winners_path, class: "nav-link custom text-danger" %>
+          </li>
         <% end %>
-        <%= link_to "dashboard", dashboard_path, class: "button" %>
-        <%= link_to "log out", destroy_user_session_path, method: :delete, class: "button" %>
-      </div>
-    <% else %>
-      <div>
-        <%= link_to "log in", new_user_session_path, class: "button" %>
-        <%= link_to "sign up", new_user_registration_path, class: "button button-primary" %>
-      </div>
-    <% end %>
+        <li class="nav-item">
+          <%= link_to "dashboard", dashboard_path, class: "nav-link custom" %>
+        </li>
+        <li class="nav-item">
+          <%= link_to "log out", destroy_user_session_path, method: :delete, class: "nav-link custom" %>
+        </li>
+      <% else %>
+        <li class="nav-item">
+          <%= link_to "log in", new_user_session_path, class: "nav-link custom" %>
+        </li>
+        <li class="nav-item">
+          <%= link_to "sign up", new_user_registration_path, class: "nav-link custom" %>
+        </li>
+      <% end %>
+      </ul>
+    </div>
   </div>
-</div>
+</nav>
