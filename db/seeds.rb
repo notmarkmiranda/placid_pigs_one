@@ -46,6 +46,8 @@ league = season.league
 users = [
   { 
     email: "markmiranda51@gmail.com", 
+    first_name: "Mark",
+    last_name: "Miranda",
     password: SecureRandom.hex(6),
     picks: [
       { team_id: all_teams["NYY"].id, date: Date.new(2020, 7, 23), game_week_id: GameWeek.by_date(season, Date.new(2020, 7, 23)).id },
@@ -70,6 +72,8 @@ users = [
   },
   { 
     email: "spanbauer.justin@gmail.com", 
+    first_name: "Justin",
+    last_name: "Spanbauer",
     password: SecureRandom.hex(6), 
     picks: [
       { team_id: all_teams["SF"].id, date: Date.new(2020, 7, 23), game_week_id: GameWeek.by_date(season, Date.new(2020, 7, 23)).id },
@@ -94,6 +98,8 @@ users = [
   },
   { 
     email: "number1brewer@gmail.com", 
+    first_name: "Mike",
+    last_name: "Hale",
     password: SecureRandom.hex(6),
     picks: [
       { team_id: all_teams["LAD"].id, date: Date.new(2020, 7, 23), game_week_id: GameWeek.by_date(season, Date.new(2020, 7, 23)).id },
@@ -118,6 +124,8 @@ users = [
   },
   { 
     email: "forrest.mears@gmail.com", 
+    first_name: "Forrest",
+    last_name: "Mears",
     password: SecureRandom.hex(6),
     picks: [
       { team_id: all_teams["WAS"].id, date: Date.new(2020, 7, 23), game_week_id: GameWeek.by_date(season, Date.new(2020, 7, 23)).id },
@@ -142,6 +150,8 @@ users = [
   },
   { 
     email: "malchowmac@gmail.com", 
+    first_name: "Mac",
+    last_name: "Malchow",
     password: SecureRandom.hex(6),
     picks: [
       { team_id: all_teams["LAD"].id, date: Date.new(2020, 7, 23), game_week_id: GameWeek.by_date(season, Date.new(2020, 7, 23)).id },
@@ -166,6 +176,8 @@ users = [
   },
   {
     email: "kyleadding1@gmail.com", 
+    first_name: "Kyle",
+    last_name: "Addington",
     password: SecureRandom.hex(6),
     picks: [
       { team_id: all_teams["LAD"].id, date: Date.new(2020, 7, 23), game_week_id: GameWeek.by_date(season, Date.new(2020, 7, 23)).id },
@@ -190,6 +202,8 @@ users = [
   },
   { 
     email: "castanza81@gmail.com", 
+    first_name: "Rob",
+    last_name: "Castanza",
     password: SecureRandom.hex(6),
     picks: [
       { team_id: all_teams["NYY"].id, date: Date.new(2020, 7, 23), game_week_id: GameWeek.by_date(season, Date.new(2020, 7, 23)).id },
@@ -214,6 +228,8 @@ users = [
   },
   { 
     email: "joshua.mejia@gmail.com", 
+    first_name: "Josh",
+    last_name: "Mejia",
     password: SecureRandom.hex(6),
     picks: [
       { team_id: all_teams["NYY"].id, date: Date.new(2020, 7, 23), game_week_id: GameWeek.by_date(season, Date.new(2020, 7, 23)).id },
@@ -238,6 +254,8 @@ users = [
   },
   { 
     email: "marshall.houston@gmail.com", 
+    first_name: "Marshall",
+    last_name: "Houston",
     password: SecureRandom.hex(6),
     picks: [
       { team_id: all_teams["LAD"].id, date: Date.new(2020, 7, 23), game_week_id: GameWeek.by_date(season, Date.new(2020, 7, 23)).id },
@@ -262,6 +280,8 @@ users = [
   },
   { 
     email: "coatsc@gmail.com", 
+    first_name: "Caleb",
+    last_name: "Coats",
     password: SecureRandom.hex(6),
     picks: [
       { team_id: all_teams["LAD"].id, date: Date.new(2020, 7, 23), game_week_id: GameWeek.by_date(season, Date.new(2020, 7, 23)).id },
@@ -286,6 +306,8 @@ users = [
   },
   { 
     email: "crlynne@yahoo.com", 
+    first_name: "Chris",
+    last_name: "Lynne",
     password: SecureRandom.hex(6),
     picks: [
       { team_id: all_teams["LAD"].id, date: Date.new(2020, 7, 23), game_week_id: GameWeek.by_date(season, Date.new(2020, 7, 23)).id },
@@ -310,6 +332,8 @@ users = [
   },
   { 
     email: "aoldenburg@toppers.com", 
+    first_name: "Adam",
+    last_name: "Oldenburg",
     password: SecureRandom.hex(6),
     picks: [
       { team_id: all_teams["NYY"].id, date: Date.new(2020, 7, 23), game_week_id: GameWeek.by_date(season, Date.new(2020, 7, 23)).id },
@@ -334,6 +358,8 @@ users = [
   },
   { 
     email: "haleyeahfam@gmail.com", 
+    first_name: "Jen",
+    last_name: "Hale",
     password: SecureRandom.hex(6),
     picks: [
       { team_id: all_teams["NYY"].id, date: Date.new(2020, 7, 23), game_week_id: GameWeek.by_date(season, Date.new(2020, 7, 23)).id },
@@ -358,6 +384,8 @@ users = [
   },
   { 
     email: "michaeldwadley@gmail.com", 
+    first_name: "Mike",
+    last_name: "Wadley",
     password: SecureRandom.hex(6),
     picks: [
       { team_id: all_teams["LAD"].id, date: Date.new(2020, 7, 23), game_week_id: GameWeek.by_date(season, Date.new(2020, 7, 23)).id },
@@ -382,6 +410,8 @@ users = [
   },
   { 
     email: "laceydennis@ymail.com", 
+    first_name: "Lacey",
+    last_name: "Dennis",
     password: SecureRandom.hex(6),
     picks: [
       { team_id: all_teams["NYY"].id, date: Date.new(2020, 7, 23), game_week_id: GameWeek.by_date(season, Date.new(2020, 7, 23)).id },
@@ -406,6 +436,8 @@ users = [
   },
   { 
     email: "fenzlga@gmail.com", 
+    first_name: "Greg",
+    last_name: "Fenzl",
     password: SecureRandom.hex(6),
     picks: [
       { team_id: all_teams["LAD"].id, date: Date.new(2020, 7, 23), game_week_id: GameWeek.by_date(season, Date.new(2020, 7, 23)).id },
@@ -430,6 +462,8 @@ users = [
   },
   { 
     email: "wong13@gmail.com", 
+    first_name: "Mike",
+    last_name: "Wong",
     password: SecureRandom.hex(6),
     picks: [
       { team_id: all_teams["LAD"].id, date: Date.new(2020, 7, 23), game_week_id: GameWeek.by_date(season, Date.new(2020, 7, 23)).id },
@@ -457,6 +491,8 @@ users = [
 users.each do |user|
   u = User.find_or_initialize_by(email: user[:email])
   u.password = user[:password] if u.new_record?
+  u.first_name = user[:first_name]
+  u.last_name = user[:last_name]
   puts "#{u.email} created"
 
   u.save

@@ -14,7 +14,8 @@ class Season < ApplicationRecord
   end
 
   def other_users(user_id)
-    league.memberships.where.not(user_id: user_id).map(&:user).sort_by { |u| u.email }
+    users = UserDecorator.decorate_collection(league.memberships.where.not(user_id: user_id).map(&:user))
+    users.sort_by { |u| u.email }
   end
 
   private
