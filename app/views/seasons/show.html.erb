@@ -29,7 +29,7 @@
         <td>My Picks</td>
         <% if params[:show_all] == "true" %>
           <% @season.other_users(current_user.id).each do |user| %>
-            <td><%= user.email %></td> 
+            <td class="nowrap"><%= user.identifier %></td> 
           <% end %>
         <% end %>
       </tr>

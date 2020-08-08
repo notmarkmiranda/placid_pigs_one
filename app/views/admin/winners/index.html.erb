@@ -1,31 +1,35 @@
 <div class="container">
-  <a href="#<%= formatted_date_with_day(Date.today) %>", class="button">Today</a>
+  <div class="button-actions-row">
+    <a href="#<%= formatted_date_with_day(Date.today) %>", class="btn btn-outline-secondary btn-sm">Today</a>
+  </div>
 
-  <table class="u-full-width">
-    <tr>
-      <th>Date</th>
-      <td>Team</td>
-    </tr>
-    <% @all_dates.each do |date| %> 
+  <div class="table-responsive">
+    <table class="table table-sm">
       <tr>
-        <td rowspan=31>
-          <a name="<%= formatted_date_with_day(date) %>">
-            <%= formatted_date_with_day(date) %>
-          </a>
-        </td>
+        <th>Date</th>
+        <td>Team</td>
       </tr>
-      <% Team.all.each do |team| %>
-      <tr>
-        <td class="team-cell">
-          <%= team.full_name %>
-          <div class="team-cell-buttons">
-            <%= button_to "W", admin_winners_path, method: :post, params: { winner: { team_id: team.id, date: date, status: :winner } }, class: 'button button-primary', disabled: @winners.exists_for_date?(team, date, :winner) %>
-            <%= button_to "L", admin_winners_path, method: :post, params: { winner: { team_id: team.id, date: date, status: :loser } }, class:'button button-loser', disabled: @winners.exists_for_date?(team, date, :loser) %>
-            <%= button_to "X", admin_winners_path, method: :post, params: { winner: { team_id: team.id, date: date, status: :no_status } }, disabled: @winners.exists_for_date?(team, date, :no_status) %>
-          </div>
-        </td>
-      </tr>
+      <% @all_dates.each do |date| %> 
+        <tr>
+          <td rowspan=31>
+            <a name="<%= formatted_date_with_day(date) %>">
+              <%= formatted_date_with_day(date) %>
+            </a>
+          </td>
+        </tr>
+        <% Team.all.each do |team| %>
+        <tr>
+          <td class="team-cell">
+            <%= team.full_name %>
+            <div class="team-cell-buttons">
+              <%= button_to "W", admin_winners_path, method: :post, params: { winner: { team_id: team.id, date: date, status: :winner } }, class: 'btn btn-outline-primary btn-sm', disabled: @winners.exists_for_date?(team, date, :winner) %>
+              <%= button_to "L", admin_winners_path, method: :post, params: { winner: { team_id: team.id, date: date, status: :loser } }, class:'btn btn-outline-danger btn-sm', disabled: @winners.exists_for_date?(team, date, :loser) %>
+              <%= button_to "X", admin_winners_path, method: :post, params: { winner: { team_id: team.id, date: date, status: :no_status } }, class: 'btn btn-outline-secondary btn-sm', disabled: @winners.exists_for_date?(team, date, :no_status) %>
+            </div>
+          </td>
+        </tr>
+        <% end %>
       <% end %>
-    <% end %>
-  </table>
+    </table>
+  </div>
 </div>
