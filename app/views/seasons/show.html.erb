@@ -46,7 +46,7 @@
           <% pick = @all_picks.by_date(date, current_user) %>
           <% if pick %>
             <td class="<%= pick.winner_css %> existing_pick nowrap">
-              <span><%= @all_picks.by_date(date, current_user).team.full_name %></span>
+              <span><%= @all_picks.by_date(date, current_user).team.abbreviation %></span>
               <% unless week.locked? %>
                 <%= button_to @all_picks.by_date(date, current_user), method: :delete, class: "button-secondary", form_class: "delete_pick" do %>
                   <%= fa_icon "times" %>
@@ -81,7 +81,7 @@
                 <% pick = @all_picks.by_date(date, user) %>
                 <% if pick %>
                   <td class="<%= pick.winner_css %> nowrap">
-                    <%= pick.team.full_name %>
+                    <%= pick.team.abbreviation %>
                   </td>
                 <% else %>
                   <td>
