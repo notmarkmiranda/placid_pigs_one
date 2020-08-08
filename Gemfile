@@ -11,12 +11,13 @@ gem "webpacker", "~> 4.0"
 gem "jbuilder", "~> 2.7"
 gem "bootsnap", ">= 1.4.2", require: false
 
+#gem "bootstrap", "~> 4.5.0"
 gem "devise"
 gem "draper"
 gem "font-awesome-rails"
+gem "jquery-rails"
 gem "pundit"
 gem "sidekiq"
-gem 'skeleton-rails', :git => 'https://github.com/helios-technologies/skeleton-rails'
 
 group :development, :test do
   gem "capybara"

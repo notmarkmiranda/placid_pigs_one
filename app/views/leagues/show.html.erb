@@ -1,27 +1,31 @@
 <div class="container">
-  <div class="button-actions-row">
-    <% if policy(@league).destroy? %>
-      <%= button_to "Delete League", @league, method: :delete, class: "button", form_class: "delete-league" %>
-    <% end %>
-    <%= link_to "New Season", new_season_path(league_id: @league.id), class: "button button-primary" %>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="button-actions-row">
+        <% if policy(@league).destroy? %>
+          <%= button_to "Delete League", @league, method: :delete, class: "btn btn-danger", form_class: "delete-league" %>
+        <% end %>
+        <%= link_to "New Season", new_season_path(league_id: @league.id), class: "btn btn-outline-primary" %>
+      </div>
+      <h4>League Name: <%= @league.name %></h4>
+      <h4>Seasons</h4>
+      <table class="table table-sm table-responsive-sm">
+        <tr>
+          <th>Season Name</th>
+          <th>Start Date</th>
+          <th>End Date</th>
+          <th>Days in Season</th>
+        </tr>
+      <% @league.seasons.decorate.each do |season| %>
+        <tr>
+          <td><%= link_to season.name, season %></td>
+          <td><%= season.formatted_start_date %></td>
+          <td><%= season.formatted_end_date %></td>
+          <td><%= season_days(season) %></td>
+        </tr>
+      <% end %>
+      </table>
+    </div>
   </div>
-  <h4>League Name: <%= @league.name %></h4>
-  <h4>Seasons</h4>
-  <table class="u-full-width">
-    <tr>
-      <th>Season Name</th>
-      <th>Start Date</th>
-      <th>End Date</th>
-      <th>Days in Season</th>
-    </tr>
-  <% @league.seasons.decorate.each do |season| %>
-    <tr>
-      <td><%= link_to season.name, season %></td>
-      <td><%= season.formatted_start_date %></td>
-      <td><%= season.formatted_end_date %></td>
-      <td><%= season_days(season) %></td>
-    </tr>
-  <% end %>
-  </table>
 </div>
 

@@ -1,22 +1,26 @@
 <div class="container">
-  <div class="button-actions-row">
-    <%= link_to "New League", new_league_path, class: "button button-primary" %>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="button-actions-row">
+        <%= link_to "New League", new_league_path, class: "btn btn-primary" %>
+      </div>
+      <h4>Leagues</h4>
+      <table class="table table-sm table-responsive-sm">
+        <tr>
+          <th>League Name</th>
+          <th>Role</th>
+        </tr>
+        <% current_user.user_leagues.each do |league| %>
+          <tr>
+            <td>
+              <%= link_to league.name, league %>
+            </td>
+            <td>
+              <%= league.role_for_user(current_user) %>
+            </td>
+          </tr>
+        <% end %>
+      </table>
+    </div>
   </div>
-  <h4>Leagues</h4>
-  <table class="u-full-width">
-    <tr>
-      <th>League Name</th>
-      <th>Role</th>
-    </tr>
-    <% current_user.user_leagues.each do |league| %>
-      <tr>
-        <td>
-          <%= link_to league.name, league %>
-        </td>
-        <td>
-          <%= league.role_for_user(current_user) %>
-        </td>
-      </tr>
-    <% end %>
-  </table>
 </div>
