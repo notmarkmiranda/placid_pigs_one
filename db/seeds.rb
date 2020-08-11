@@ -879,4 +879,8 @@ Winner.find_or_create_by(team: all_teams["CWS"], status: :loser, date: Date.new(
 Winner.find_or_create_by(team: all_teams["BAL"], status: :winner, date: Date.new(2020, 8, 7))
 Winner.find_or_create_by(team: all_teams["WAS"], status: :loser, date: Date.new(2020, 8, 7))
 
+Winner.all.each do |winner|
+  WinnerPicksJob.perform_now(winner)
+end
+
 puts "#{Winner.count} winners created!"
