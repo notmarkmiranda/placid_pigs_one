@@ -18,6 +18,16 @@ class Season < ApplicationRecord
     users.sort_by { |u| u.email }
   end
 
+  def standings(limit=nil)
+    User
+      .joins(:picks)
+      .where(picks: { status: :winner, game_week: game_weeks })
+      .select('users.*, count(picks.id) as pick_count')
+      .group('users.id')
+      .order('count(picks.id) DESC')
+      .limit(limit)
+  end
+
   private
 
   def create_game_weeks

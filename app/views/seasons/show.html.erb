@@ -6,12 +6,40 @@
     <% end %>
   </div>
   <h4><%= @season.name %></h4>
-  <ul>
-    <li>Start Date: <%= @season.formatted_start_date %></li>
-    <li>End Date: <%= @season.formatted_end_date %></li>
-    <li>Betting window: <%= @season.increment_lock %></li>
-    <li>Offset: <%= @season.offset %></li>
-  </ul>
+  <div class="row">
+    <div class="col-md-5">
+      <ul>
+        <li>Start Date: <%= @season.formatted_start_date %></li>
+        <li>End Date: <%= @season.formatted_end_date %></li>
+        <li>Betting window: <%= @season.increment_lock %></li>
+        <li>Offset: <%= @season.offset %></li>
+      </ul>
+    </div>
+    <div class="col-md-7">
+      <h5>Top 3</h5>
+      <div class="table-responsive">
+        <table class="table table-sm">
+          <tr>
+            <th>Place</th>
+            <th>Person</th>
+            <th>Points</th>
+          </tr>
+          <% @season.standings(3).each_with_index do |standing, index| %>
+            <tr>
+              <td><%= index + 1 %></td>
+              <td><%= standing.decorate.identifier %></td>
+              <td><%= standing.pick_count %></td>
+            </tr>
+          <% end %>
+          <tr>
+            <td colspan="3">
+              <%= link_to "View full standings", standings_season_path(@season) %>
+            </td>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </div>
 
   <div class="button-actions-row">
   <% if params[:show_all] != "true" %>
@@ -20,6 +48,7 @@
     <%= link_to "Just My Picks", season_path(@season), class: "btn btn-outline-secondary btn-sm" %>
   <% end %>
   </div>
+
 
   <div class="table-responsive">
     <table class="table table-sm">

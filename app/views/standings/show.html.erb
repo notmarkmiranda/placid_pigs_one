@@ -1,0 +1,22 @@
+<div class="container">
+  <div class="button-actions-row">
+    <%= link_to "Back to Season", @season, class: "btn btn-outline-primary btn-sm" %>
+  </div>
+  <h5>Full Standings</h5>
+  <div class="table-responsive">
+    <table class="table">
+      <tr>
+        <th>Place</th>
+        <th>Person</th>
+        <th>Points</th>
+      </tr>
+      <% @standings.each_with_index do |standing, index| %>
+        <tr>
+          <td><%= index + 1 %></td>
+          <td><%= standing.identifier %></td>
+          <td><%= standing.pick_count %></td>
+        </tr>
+      <% end %>
+    </table>
+  </div>
+</div>
