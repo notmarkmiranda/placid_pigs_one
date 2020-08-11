@@ -6,7 +6,11 @@ Rails.application.routes.draw do
   get "/dashboard", to: "dashboard#show", as: "dashboard"
 
   resources :leagues
-  resources :seasons, except: [:index]
+  resources :seasons, except: [:index] do
+    member do
+      get 'standings', to: 'standings#show'
+    end
+  end
   resources :picks, only: [:create, :destroy]
 
   namespace :admin do
