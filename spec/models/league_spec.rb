@@ -14,5 +14,28 @@ describe League, type: :model do
     it { should have_many :seasons }
   end
 
-  describe "methods"
+  describe "methods" do
+    let(:league) { create(:league) }
+
+    describe "#role_for_user" do
+      subject { league.role_for_user(user) } 
+
+      describe "for non-member" do
+        let(:user) { create(:user) }
+
+        it "returns nil" do
+          expect(subject).to eq(nil)
+        end
+      end
+
+      describe "for member" do
+        let(:membership) { create(:membership, league: league, role: 1) }
+        let(:user) { membership.user }
+
+        it "returns the role" do
+          expect(subject).to eq("admin")
+        end
+      end
+    end
+  end
 end
