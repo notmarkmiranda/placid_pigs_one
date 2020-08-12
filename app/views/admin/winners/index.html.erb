@@ -18,13 +18,14 @@
           </td>
         </tr>
         <% Team.all.each do |team| %>
+          <% winner = @winners.find_by(team: team, date: date) %>
         <tr>
           <td class="team-cell">
             <%= team.full_name %>
             <div class="team-cell-buttons">
-              <%= button_to "W", admin_winners_path, method: :post, params: { winner: { team_id: team.id, date: date, status: :winner } }, class: 'btn btn-outline-primary btn-sm', disabled: @winners.exists_for_date?(team, date, :winner) %>
-              <%= button_to "L", admin_winners_path, method: :post, params: { winner: { team_id: team.id, date: date, status: :loser } }, class:'btn btn-outline-danger btn-sm', disabled: @winners.exists_for_date?(team, date, :loser) %>
-              <%= button_to "X", admin_winners_path, method: :post, params: { winner: { team_id: team.id, date: date, status: :no_status } }, class: 'btn btn-outline-secondary btn-sm', disabled: @winners.exists_for_date?(team, date, :no_status) %>
+              <%= button_to "W", admin_winners_path, method: :post, params: { winner: { team_id: team.id, date: date, status: :winner } }, class: 'btn btn-outline-primary btn-sm', disabled: winner&.winner? %>
+              <%= button_to "L", admin_winners_path, method: :post, params: { winner: { team_id: team.id, date: date, status: :loser } }, class:'btn btn-outline-danger btn-sm', disabled: winner&.loser? %>
+              <%= button_to "X", admin_winners_path, method: :post, params: { winner: { team_id: team.id, date: date, status: :no_status } }, class: 'btn btn-outline-secondary btn-sm', disabled: winner.nil? || winner.no_status? %>
             </div>
           </td>
         </tr>
