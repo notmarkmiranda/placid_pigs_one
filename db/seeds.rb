@@ -40,8 +40,21 @@ all_teams = teams.each_with_object({}) do |team, acc|
   puts "#{new_team.city} #{new_team.name}"
 end
 
-season = Season.find(1)
-league = season.league
+first_user = {
+    email: "markmiranda51@gmail.com", 
+    first_name: "Mark",
+    last_name: "Miranda",
+    password: SecureRandom.hex(6),
+}
+
+mark = User.find_or_initialize_by(email: first_user[:email])
+mark.first_name = first_user[:first_name]
+mark.last_name = first_user[:last_name]
+mark.password = first_user[:password]
+mark.save!
+
+league = League.find_or_create_by(name: "MH / MM Super Duper", owner: mark)
+season = Season.find_or_create_by(start_date: Date.new(2020, 7, 23), end_date: Date.new(2020, 9, 29), offset: 4, increment_lock: 7, league: league, name: "COVID19 - 2020")
 
 users = [
   { 
@@ -67,7 +80,14 @@ users = [
       { team_id: all_teams["MIN"].id, date: Date.new(2020, 8, 6), game_week_id: GameWeek.by_date(season, Date.new(2020, 8, 6)).id },
       { team_id: all_teams["WAS"].id, date: Date.new(2020, 8, 7), game_week_id: GameWeek.by_date(season, Date.new(2020, 8, 7)).id },
       { team_id: all_teams["LAA"].id, date: Date.new(2020, 8, 8), game_week_id: GameWeek.by_date(season, Date.new(2020, 8, 8)).id },
-      { team_id: all_teams["MIL"].id, date: Date.new(2020, 8, 9), game_week_id: GameWeek.by_date(season, Date.new(2020, 8, 9)).id }
+      { team_id: all_teams["MIL"].id, date: Date.new(2020, 8, 9), game_week_id: GameWeek.by_date(season, Date.new(2020, 8, 9)).id },
+      { team_id: all_teams["PHI"].id, date: Date.new(2020, 8, 10), game_week_id: GameWeek.by_date(season, Date.new(2020, 8, 10)).id },
+      { team_id: all_teams["CHC"].id, date: Date.new(2020, 8, 11), game_week_id: GameWeek.by_date(season, Date.new(2020, 8, 11)).id },
+      { team_id: all_teams["MIN"].id, date: Date.new(2020, 8, 12), game_week_id: GameWeek.by_date(season, Date.new(2020, 8, 12)).id },
+      { team_id: all_teams["LAD"].id, date: Date.new(2020, 8, 13), game_week_id: GameWeek.by_date(season, Date.new(2020, 8, 13)).id },
+      { team_id: all_teams["NYY"].id, date: Date.new(2020, 8, 14), game_week_id: GameWeek.by_date(season, Date.new(2020, 8, 14)).id },
+      { team_id: all_teams["COL"].id, date: Date.new(2020, 8, 15), game_week_id: GameWeek.by_date(season, Date.new(2020, 8, 15)).id },
+      { team_id: all_teams["SD"].id, date: Date.new(2020, 8, 16), game_week_id: GameWeek.by_date(season, Date.new(2020, 8, 16)).id }
     ]
   },
   { 
@@ -93,7 +113,14 @@ users = [
       { team_id: all_teams["MIN"].id, date: Date.new(2020, 8, 6), game_week_id: GameWeek.by_date(season, Date.new(2020, 8, 6)).id },
       { team_id: all_teams["ATL"].id, date: Date.new(2020, 8, 7), game_week_id: GameWeek.by_date(season, Date.new(2020, 8, 7)).id },
       { team_id: all_teams["MIL"].id, date: Date.new(2020, 8, 8), game_week_id: GameWeek.by_date(season, Date.new(2020, 8, 8)).id },
-      { team_id: all_teams["CHC"].id, date: Date.new(2020, 8, 9), game_week_id: GameWeek.by_date(season, Date.new(2020, 8, 9)).id }
+      { team_id: all_teams["CHC"].id, date: Date.new(2020, 8, 9), game_week_id: GameWeek.by_date(season, Date.new(2020, 8, 9)).id },
+      { team_id: all_teams["COL"].id, date: Date.new(2020, 8, 10), game_week_id: GameWeek.by_date(season, Date.new(2020, 8, 10)).id },
+      { team_id: all_teams["CWS"].id, date: Date.new(2020, 8, 11), game_week_id: GameWeek.by_date(season, Date.new(2020, 8, 11)).id },
+      { team_id: all_teams["NYY"].id, date: Date.new(2020, 8, 12), game_week_id: GameWeek.by_date(season, Date.new(2020, 8, 12)).id },
+      { team_id: all_teams["BOS"].id, date: Date.new(2020, 8, 13), game_week_id: GameWeek.by_date(season, Date.new(2020, 8, 13)).id },
+      { team_id: all_teams["MIN"].id, date: Date.new(2020, 8, 14), game_week_id: GameWeek.by_date(season, Date.new(2020, 8, 14)).id },
+      { team_id: all_teams["FLA"].id, date: Date.new(2020, 8, 15), game_week_id: GameWeek.by_date(season, Date.new(2020, 8, 15)).id },
+      { team_id: all_teams["HOU"].id, date: Date.new(2020, 8, 16), game_week_id: GameWeek.by_date(season, Date.new(2020, 8, 16)).id }
     ]
   },
   { 
@@ -119,7 +146,14 @@ users = [
       { team_id: all_teams["COL"].id, date: Date.new(2020, 8, 6), game_week_id: GameWeek.by_date(season, Date.new(2020, 8, 6)).id },
       { team_id: all_teams["MIN"].id, date: Date.new(2020, 8, 7), game_week_id: GameWeek.by_date(season, Date.new(2020, 8, 7)).id },
       { team_id: all_teams["BOS"].id, date: Date.new(2020, 8, 8), game_week_id: GameWeek.by_date(season, Date.new(2020, 8, 8)).id },
-      { team_id: all_teams["NYY"].id, date: Date.new(2020, 8, 9), game_week_id: GameWeek.by_date(season, Date.new(2020, 8, 9)).id }
+      { team_id: all_teams["NYY"].id, date: Date.new(2020, 8, 9), game_week_id: GameWeek.by_date(season, Date.new(2020, 8, 9)).id },
+      { team_id: all_teams["NYM"].id, date: Date.new(2020, 8, 10), game_week_id: GameWeek.by_date(season, Date.new(2020, 8, 10)).id },
+      { team_id: all_teams["MIL"].id, date: Date.new(2020, 8, 11), game_week_id: GameWeek.by_date(season, Date.new(2020, 8, 11)).id },
+      { team_id: all_teams["NYY"].id, date: Date.new(2020, 8, 12), game_week_id: GameWeek.by_date(season, Date.new(2020, 8, 12)).id },
+      { team_id: all_teams["LAD"].id, date: Date.new(2020, 8, 13), game_week_id: GameWeek.by_date(season, Date.new(2020, 8, 13)).id },
+      { team_id: all_teams["CIN"].id, date: Date.new(2020, 8, 14), game_week_id: GameWeek.by_date(season, Date.new(2020, 8, 14)).id },
+      { team_id: all_teams["COL"].id, date: Date.new(2020, 8, 15), game_week_id: GameWeek.by_date(season, Date.new(2020, 8, 15)).id },
+      { team_id: all_teams["BAL"].id, date: Date.new(2020, 8, 16), game_week_id: GameWeek.by_date(season, Date.new(2020, 8, 16)).id }
     ]
   },
   { 
@@ -145,7 +179,14 @@ users = [
       { team_id: all_teams["SEA"].id, date: Date.new(2020, 8, 6), game_week_id: GameWeek.by_date(season, Date.new(2020, 8, 6)).id },
       { team_id: all_teams["WAS"].id, date: Date.new(2020, 8, 7), game_week_id: GameWeek.by_date(season, Date.new(2020, 8, 7)).id },
       { team_id: all_teams["LAA"].id, date: Date.new(2020, 8, 8), game_week_id: GameWeek.by_date(season, Date.new(2020, 8, 8)).id },
-      { team_id: all_teams["KAN"].id, date: Date.new(2020, 8, 9), game_week_id: GameWeek.by_date(season, Date.new(2020, 8, 9)).id }
+      { team_id: all_teams["KAN"].id, date: Date.new(2020, 8, 9), game_week_id: GameWeek.by_date(season, Date.new(2020, 8, 9)).id },
+      { team_id: all_teams["STL"].id, date: Date.new(2020, 8, 10), game_week_id: GameWeek.by_date(season, Date.new(2020, 8, 10)).id },
+      { team_id: all_teams["COL"].id, date: Date.new(2020, 8, 11), game_week_id: GameWeek.by_date(season, Date.new(2020, 8, 11)).id },
+      { team_id: all_teams["TEX"].id, date: Date.new(2020, 8, 12), game_week_id: GameWeek.by_date(season, Date.new(2020, 8, 12)).id },
+      { team_id: all_teams["NYY"].id, date: Date.new(2020, 8, 13), game_week_id: GameWeek.by_date(season, Date.new(2020, 8, 13)).id },
+      { team_id: all_teams["PHI"].id, date: Date.new(2020, 8, 14), game_week_id: GameWeek.by_date(season, Date.new(2020, 8, 14)).id },
+      { team_id: all_teams["LAD"].id, date: Date.new(2020, 8, 15), game_week_id: GameWeek.by_date(season, Date.new(2020, 8, 15)).id },
+      { team_id: all_teams["SD"].id, date: Date.new(2020, 8, 16), game_week_id: GameWeek.by_date(season, Date.new(2020, 8, 16)).id }
     ]
   },
   { 
@@ -171,7 +212,14 @@ users = [
       { team_id: all_teams["CHC"].id, date: Date.new(2020, 8, 6), game_week_id: GameWeek.by_date(season, Date.new(2020, 8, 6)).id },
       { team_id: all_teams["COL"].id, date: Date.new(2020, 8, 7), game_week_id: GameWeek.by_date(season, Date.new(2020, 8, 7)).id },
       { team_id: all_teams["ATL"].id, date: Date.new(2020, 8, 8), game_week_id: GameWeek.by_date(season, Date.new(2020, 8, 8)).id },
-      { team_id: all_teams["LAD"].id, date: Date.new(2020, 8, 9), game_week_id: GameWeek.by_date(season, Date.new(2020, 8, 9)).id }
+      { team_id: all_teams["LAD"].id, date: Date.new(2020, 8, 9), game_week_id: GameWeek.by_date(season, Date.new(2020, 8, 9)).id },
+      { team_id: all_teams["COL"].id, date: Date.new(2020, 8, 10), game_week_id: GameWeek.by_date(season, Date.new(2020, 8, 10)).id },
+      { team_id: all_teams["HOU"].id, date: Date.new(2020, 8, 11), game_week_id: GameWeek.by_date(season, Date.new(2020, 8, 11)).id },
+      { team_id: all_teams["CWS"].id, date: Date.new(2020, 8, 12), game_week_id: GameWeek.by_date(season, Date.new(2020, 8, 12)).id },
+      { team_id: all_teams["TB"].id, date: Date.new(2020, 8, 13), game_week_id: GameWeek.by_date(season, Date.new(2020, 8, 13)).id },
+      { team_id: all_teams["LAD"].id, date: Date.new(2020, 8, 14), game_week_id: GameWeek.by_date(season, Date.new(2020, 8, 14)).id },
+      { team_id: all_teams["NYY"].id, date: Date.new(2020, 8, 15), game_week_id: GameWeek.by_date(season, Date.new(2020, 8, 15)).id },
+      { team_id: all_teams["STL"].id, date: Date.new(2020, 8, 16), game_week_id: GameWeek.by_date(season, Date.new(2020, 8, 16)).id }
     ]
   },
   {
@@ -197,7 +245,14 @@ users = [
       { team_id: all_teams["COL"].id, date: Date.new(2020, 8, 6), game_week_id: GameWeek.by_date(season, Date.new(2020, 8, 6)).id },
       { team_id: all_teams["WAS"].id, date: Date.new(2020, 8, 7), game_week_id: GameWeek.by_date(season, Date.new(2020, 8, 7)).id },
       { team_id: all_teams["HOU"].id, date: Date.new(2020, 8, 8), game_week_id: GameWeek.by_date(season, Date.new(2020, 8, 8)).id },
-      { team_id: all_teams["SD"].id, date: Date.new(2020, 8, 9), game_week_id: GameWeek.by_date(season, Date.new(2020, 8, 9)).id } 
+      { team_id: all_teams["SD"].id, date: Date.new(2020, 8, 9), game_week_id: GameWeek.by_date(season, Date.new(2020, 8, 9)).id },
+      { team_id: all_teams["LAD"].id, date: Date.new(2020, 8, 10), game_week_id: GameWeek.by_date(season, Date.new(2020, 8, 10)).id },
+      { team_id: all_teams["COL"].id, date: Date.new(2020, 8, 11), game_week_id: GameWeek.by_date(season, Date.new(2020, 8, 11)).id },
+      { team_id: all_teams["CHC"].id, date: Date.new(2020, 8, 12), game_week_id: GameWeek.by_date(season, Date.new(2020, 8, 12)).id },
+      { team_id: all_teams["MIL"].id, date: Date.new(2020, 8, 13), game_week_id: GameWeek.by_date(season, Date.new(2020, 8, 13)).id },
+      { team_id: all_teams["SD"].id, date: Date.new(2020, 8, 14), game_week_id: GameWeek.by_date(season, Date.new(2020, 8, 14)).id },
+      { team_id: all_teams["CWS"].id, date: Date.new(2020, 8, 15), game_week_id: GameWeek.by_date(season, Date.new(2020, 8, 15)).id },
+      { team_id: all_teams["MIN"].id, date: Date.new(2020, 8, 16), game_week_id: GameWeek.by_date(season, Date.new(2020, 8, 16)).id }
     ]
   },
   { 
@@ -223,7 +278,21 @@ users = [
       { team_id: all_teams["MIL"].id, date: Date.new(2020, 8, 6), game_week_id: GameWeek.by_date(season, Date.new(2020, 8, 6)).id },
       { team_id: all_teams["MIN"].id, date: Date.new(2020, 8, 7), game_week_id: GameWeek.by_date(season, Date.new(2020, 8, 7)).id },
       { team_id: all_teams["LAD"].id, date: Date.new(2020, 8, 8), game_week_id: GameWeek.by_date(season, Date.new(2020, 8, 8)).id },
-      { team_id: all_teams["CHC"].id, date: Date.new(2020, 8, 9), game_week_id: GameWeek.by_date(season, Date.new(2020, 8, 9)).id }
+      { team_id: all_teams["CHC"].id, date: Date.new(2020, 8, 9), game_week_id: GameWeek.by_date(season, Date.new(2020, 8, 9)).id },
+      { team_id: all_teams["ATL"].id, date: Date.new(2020, 8, 10), game_week_id: GameWeek.by_date(season, Date.new(2020, 8, 10)).id },
+      { team_id: all_teams["MIN"].id, date: Date.new(2020, 8, 11), game_week_id: GameWeek.by_date(season, Date.new(2020, 8, 11)).id },
+      { team_id: all_teams["NYY"].id, date: Date.new(2020, 8, 12), game_week_id: GameWeek.by_date(season, Date.new(2020, 8, 12)).id },
+      { team_id: all_teams["LAD"].id, date: Date.new(2020, 8, 13), game_week_id: GameWeek.by_date(season, Date.new(2020, 8, 13)).id },
+      { team_id: all_teams["COL"].id, date: Date.new(2020, 8, 14), game_week_id: GameWeek.by_date(season, Date.new(2020, 8, 14)).id },
+      { team_id: all_teams["CWS"].id, date: Date.new(2020, 8, 15), game_week_id: GameWeek.by_date(season, Date.new(2020, 8, 15)).id },
+      { team_id: all_teams["FLA"].id, date: Date.new(2020, 8, 16), game_week_id: GameWeek.by_date(season, Date.new(2020, 8, 16)).id },
+      { team_id: all_teams["NYY"].id, date: Date.new(2020, 8, 17), game_week_id: GameWeek.by_date(season, Date.new(2020, 8, 17)).id },
+      { team_id: all_teams["COL"].id, date: Date.new(2020, 8, 18), game_week_id: GameWeek.by_date(season, Date.new(2020, 8, 18)).id },
+      { team_id: all_teams["CLE"].id, date: Date.new(2020, 8, 19), game_week_id: GameWeek.by_date(season, Date.new(2020, 8, 19)).id },
+      { team_id: all_teams["MIN"].id, date: Date.new(2020, 8, 20), game_week_id: GameWeek.by_date(season, Date.new(2020, 8, 20)).id },
+      { team_id: all_teams["OAK"].id, date: Date.new(2020, 8, 21), game_week_id: GameWeek.by_date(season, Date.new(2020, 8, 21)).id },
+      { team_id: all_teams["MIL"].id, date: Date.new(2020, 8, 22), game_week_id: GameWeek.by_date(season, Date.new(2020, 8, 22)).id },
+      { team_id: all_teams["CHC"].id, date: Date.new(2020, 8, 23), game_week_id: GameWeek.by_date(season, Date.new(2020, 8, 23)).id }
     ] 
   },
   { 
@@ -249,7 +318,14 @@ users = [
       { team_id: all_teams["HOU"].id, date: Date.new(2020, 8, 6), game_week_id: GameWeek.by_date(season, Date.new(2020, 8, 6)).id },
       { team_id: all_teams["SEA"].id, date: Date.new(2020, 8, 7), game_week_id: GameWeek.by_date(season, Date.new(2020, 8, 7)).id },
       { team_id: all_teams["WAS"].id, date: Date.new(2020, 8, 8), game_week_id: GameWeek.by_date(season, Date.new(2020, 8, 8)).id },
-      { team_id: all_teams["NYY"].id, date: Date.new(2020, 8, 9), game_week_id: GameWeek.by_date(season, Date.new(2020, 8, 9)).id }
+      { team_id: all_teams["NYY"].id, date: Date.new(2020, 8, 9), game_week_id: GameWeek.by_date(season, Date.new(2020, 8, 9)).id },
+      { team_id: all_teams["COL"].id, date: Date.new(2020, 8, 10), game_week_id: GameWeek.by_date(season, Date.new(2020, 8, 10)).id },
+      { team_id: all_teams["NYY"].id, date: Date.new(2020, 8, 11), game_week_id: GameWeek.by_date(season, Date.new(2020, 8, 11)).id },
+      { team_id: all_teams["CHC"].id, date: Date.new(2020, 8, 12), game_week_id: GameWeek.by_date(season, Date.new(2020, 8, 12)).id },
+      { team_id: all_teams["BOS"].id, date: Date.new(2020, 8, 13), game_week_id: GameWeek.by_date(season, Date.new(2020, 8, 13)).id },
+      { team_id: all_teams["LAD"].id, date: Date.new(2020, 8, 14), game_week_id: GameWeek.by_date(season, Date.new(2020, 8, 14)).id },
+      { team_id: all_teams["MIN"].id, date: Date.new(2020, 8, 15), game_week_id: GameWeek.by_date(season, Date.new(2020, 8, 15)).id },
+      { team_id: all_teams["CIN"].id, date: Date.new(2020, 8, 16), game_week_id: GameWeek.by_date(season, Date.new(2020, 8, 16)).id }
     ] 
   },
   { 
@@ -275,7 +351,14 @@ users = [
       { team_id: all_teams["MIN"].id, date: Date.new(2020, 8, 6), game_week_id: GameWeek.by_date(season, Date.new(2020, 8, 6)).id },
       { team_id: all_teams["SD"].id, date: Date.new(2020, 8, 7), game_week_id: GameWeek.by_date(season, Date.new(2020, 8, 7)).id },
       { team_id: all_teams["LAD"].id, date: Date.new(2020, 8, 8), game_week_id: GameWeek.by_date(season, Date.new(2020, 8, 8)).id },
-      { team_id: all_teams["ATL"].id, date: Date.new(2020, 8, 9), game_week_id: GameWeek.by_date(season, Date.new(2020, 8, 9)).id }
+      { team_id: all_teams["ATL"].id, date: Date.new(2020, 8, 9), game_week_id: GameWeek.by_date(season, Date.new(2020, 8, 9)).id },
+      { team_id: all_teams["ATL"].id, date: Date.new(2020, 8, 10), game_week_id: GameWeek.by_date(season, Date.new(2020, 8, 10)).id },
+      { team_id: all_teams["COL"].id, date: Date.new(2020, 8, 11), game_week_id: GameWeek.by_date(season, Date.new(2020, 8, 11)).id },
+      { team_id: all_teams["TEX"].id, date: Date.new(2020, 8, 12), game_week_id: GameWeek.by_date(season, Date.new(2020, 8, 12)).id },
+      { team_id: all_teams["PHI"].id, date: Date.new(2020, 8, 13), game_week_id: GameWeek.by_date(season, Date.new(2020, 8, 13)).id },
+      { team_id: all_teams["NYY"].id, date: Date.new(2020, 8, 14), game_week_id: GameWeek.by_date(season, Date.new(2020, 8, 14)).id },
+      { team_id: all_teams["OAK"].id, date: Date.new(2020, 8, 15), game_week_id: GameWeek.by_date(season, Date.new(2020, 8, 15)).id },
+      { team_id: all_teams["LAD"].id, date: Date.new(2020, 8, 16), game_week_id: GameWeek.by_date(season, Date.new(2020, 8, 16)).id }
     ] 
   },
   { 
@@ -301,7 +384,14 @@ users = [
       { team_id: all_teams["ATL"].id, date: Date.new(2020, 8, 6), game_week_id: GameWeek.by_date(season, Date.new(2020, 8, 6)).id },
       { team_id: all_teams["BAL"].id, date: Date.new(2020, 8, 7), game_week_id: GameWeek.by_date(season, Date.new(2020, 8, 7)).id },
       { team_id: all_teams["SD"].id, date: Date.new(2020, 8, 8), game_week_id: GameWeek.by_date(season, Date.new(2020, 8, 8)).id },
-      { team_id: all_teams["COL"].id, date: Date.new(2020, 8, 9), game_week_id: GameWeek.by_date(season, Date.new(2020, 8, 9)).id }
+      { team_id: all_teams["COL"].id, date: Date.new(2020, 8, 9), game_week_id: GameWeek.by_date(season, Date.new(2020, 8, 9)).id },
+      { team_id: all_teams["ATL"].id, date: Date.new(2020, 8, 10), game_week_id: GameWeek.by_date(season, Date.new(2020, 8, 10)).id },
+      { team_id: all_teams["MIN"].id, date: Date.new(2020, 8, 11), game_week_id: GameWeek.by_date(season, Date.new(2020, 8, 11)).id },
+      { team_id: all_teams["COL"].id, date: Date.new(2020, 8, 12), game_week_id: GameWeek.by_date(season, Date.new(2020, 8, 12)).id },
+      { team_id: all_teams["BAL"].id, date: Date.new(2020, 8, 13), game_week_id: GameWeek.by_date(season, Date.new(2020, 8, 13)).id },
+      { team_id: all_teams["NYY"].id, date: Date.new(2020, 8, 14), game_week_id: GameWeek.by_date(season, Date.new(2020, 8, 14)).id },
+      { team_id: all_teams["CIN"].id, date: Date.new(2020, 8, 15), game_week_id: GameWeek.by_date(season, Date.new(2020, 8, 15)).id },
+      { team_id: all_teams["CHC"].id, date: Date.new(2020, 8, 16), game_week_id: GameWeek.by_date(season, Date.new(2020, 8, 16)).id }
     ] 
   },
   { 
@@ -327,7 +417,14 @@ users = [
       { team_id: all_teams["HOU"].id, date: Date.new(2020, 8, 6), game_week_id: GameWeek.by_date(season, Date.new(2020, 8, 6)).id },
       { team_id: all_teams["MIN"].id, date: Date.new(2020, 8, 7), game_week_id: GameWeek.by_date(season, Date.new(2020, 8, 7)).id },
       { team_id: all_teams["SD"].id, date: Date.new(2020, 8, 8), game_week_id: GameWeek.by_date(season, Date.new(2020, 8, 8)).id },
-      { team_id: all_teams["LAD"].id, date: Date.new(2020, 8, 9), game_week_id: GameWeek.by_date(season, Date.new(2020, 8, 9)).id }
+      { team_id: all_teams["LAD"].id, date: Date.new(2020, 8, 9), game_week_id: GameWeek.by_date(season, Date.new(2020, 8, 9)).id },
+      { team_id: all_teams["COL"].id, date: Date.new(2020, 8, 10), game_week_id: GameWeek.by_date(season, Date.new(2020, 8, 10)).id },
+      { team_id: all_teams["CWS"].id, date: Date.new(2020, 8, 11), game_week_id: GameWeek.by_date(season, Date.new(2020, 8, 11)).id },
+      { team_id: all_teams["HOU"].id, date: Date.new(2020, 8, 12), game_week_id: GameWeek.by_date(season, Date.new(2020, 8, 12)).id },
+      { team_id: all_teams["STL"].id, date: Date.new(2020, 8, 13), game_week_id: GameWeek.by_date(season, Date.new(2020, 8, 13)).id },
+      { team_id: all_teams["ATL"].id, date: Date.new(2020, 8, 14), game_week_id: GameWeek.by_date(season, Date.new(2020, 8, 14)).id },
+      { team_id: all_teams["OAK"].id, date: Date.new(2020, 8, 15), game_week_id: GameWeek.by_date(season, Date.new(2020, 8, 15)).id },
+      { team_id: all_teams["LAD"].id, date: Date.new(2020, 8, 16), game_week_id: GameWeek.by_date(season, Date.new(2020, 8, 16)).id }
     ] 
   },
   { 
@@ -353,7 +450,14 @@ users = [
       { team_id: all_teams["PIT"].id, date: Date.new(2020, 8, 6), game_week_id: GameWeek.by_date(season, Date.new(2020, 8, 6)).id },
       { team_id: all_teams["WAS"].id, date: Date.new(2020, 8, 7), game_week_id: GameWeek.by_date(season, Date.new(2020, 8, 7)).id },
       { team_id: all_teams["TEX"].id, date: Date.new(2020, 8, 8), game_week_id: GameWeek.by_date(season, Date.new(2020, 8, 8)).id },
-      { team_id: all_teams["LAD"].id, date: Date.new(2020, 8, 9), game_week_id: GameWeek.by_date(season, Date.new(2020, 8, 9)).id }
+      { team_id: all_teams["LAD"].id, date: Date.new(2020, 8, 9), game_week_id: GameWeek.by_date(season, Date.new(2020, 8, 9)).id },
+      { team_id: all_teams["MIL"].id, date: Date.new(2020, 8, 10), game_week_id: GameWeek.by_date(season, Date.new(2020, 8, 10)).id },
+      { team_id: all_teams["WAS"].id, date: Date.new(2020, 8, 11), game_week_id: GameWeek.by_date(season, Date.new(2020, 8, 11)).id },
+      { team_id: all_teams["HOU"].id, date: Date.new(2020, 8, 12), game_week_id: GameWeek.by_date(season, Date.new(2020, 8, 12)).id },
+      { team_id: all_teams["LAD"].id, date: Date.new(2020, 8, 13), game_week_id: GameWeek.by_date(season, Date.new(2020, 8, 13)).id },
+      { team_id: all_teams["KAN"].id, date: Date.new(2020, 8, 14), game_week_id: GameWeek.by_date(season, Date.new(2020, 8, 14)).id },
+      { team_id: all_teams["SF"].id, date: Date.new(2020, 8, 15), game_week_id: GameWeek.by_date(season, Date.new(2020, 8, 15)).id },
+      { team_id: all_teams["COL"].id, date: Date.new(2020, 8, 16), game_week_id: GameWeek.by_date(season, Date.new(2020, 8, 16)).id }
     ] 
   },
   { 
@@ -379,7 +483,14 @@ users = [
       { team_id: all_teams["COL"].id, date: Date.new(2020, 8, 6), game_week_id: GameWeek.by_date(season, Date.new(2020, 8, 6)).id },
       { team_id: all_teams["MIN"].id, date: Date.new(2020, 8, 7), game_week_id: GameWeek.by_date(season, Date.new(2020, 8, 7)).id },
       { team_id: all_teams["BOS"].id, date: Date.new(2020, 8, 8), game_week_id: GameWeek.by_date(season, Date.new(2020, 8, 8)).id },
-      { team_id: all_teams["NYY"].id, date: Date.new(2020, 8, 9), game_week_id: GameWeek.by_date(season, Date.new(2020, 8, 9)).id }
+      { team_id: all_teams["NYY"].id, date: Date.new(2020, 8, 9), game_week_id: GameWeek.by_date(season, Date.new(2020, 8, 9)).id },
+      { team_id: all_teams["LAD"].id, date: Date.new(2020, 8, 10), game_week_id: GameWeek.by_date(season, Date.new(2020, 8, 10)).id },
+      { team_id: all_teams["NYM"].id, date: Date.new(2020, 8, 11), game_week_id: GameWeek.by_date(season, Date.new(2020, 8, 11)).id },
+      { team_id: all_teams["NYY"].id, date: Date.new(2020, 8, 12), game_week_id: GameWeek.by_date(season, Date.new(2020, 8, 12)).id },
+      { team_id: all_teams["MIL"].id, date: Date.new(2020, 8, 13), game_week_id: GameWeek.by_date(season, Date.new(2020, 8, 13)).id },
+      { team_id: all_teams["HOU"].id, date: Date.new(2020, 8, 14), game_week_id: GameWeek.by_date(season, Date.new(2020, 8, 14)).id },
+      { team_id: all_teams["KAN"].id, date: Date.new(2020, 8, 15), game_week_id: GameWeek.by_date(season, Date.new(2020, 8, 15)).id },
+      { team_id: all_teams["COL"].id, date: Date.new(2020, 8, 16), game_week_id: GameWeek.by_date(season, Date.new(2020, 8, 16)).id }
     ] 
   },
   { 
@@ -405,7 +516,14 @@ users = [
       { team_id: all_teams["NYY"].id, date: Date.new(2020, 8, 6), game_week_id: GameWeek.by_date(season, Date.new(2020, 8, 6)).id },
       { team_id: all_teams["DET"].id, date: Date.new(2020, 8, 7), game_week_id: GameWeek.by_date(season, Date.new(2020, 8, 7)).id },
       { team_id: all_teams["HOU"].id, date: Date.new(2020, 8, 8), game_week_id: GameWeek.by_date(season, Date.new(2020, 8, 8)).id },
-      { team_id: all_teams["CHC"].id, date: Date.new(2020, 8, 9), game_week_id: GameWeek.by_date(season, Date.new(2020, 8, 9)).id }
+      { team_id: all_teams["CHC"].id, date: Date.new(2020, 8, 9), game_week_id: GameWeek.by_date(season, Date.new(2020, 8, 9)).id },
+      { team_id: all_teams["MIL"].id, date: Date.new(2020, 8, 10), game_week_id: GameWeek.by_date(season, Date.new(2020, 8, 10)).id },
+      { team_id: all_teams["HOU"].id, date: Date.new(2020, 8, 11), game_week_id: GameWeek.by_date(season, Date.new(2020, 8, 11)).id },
+      { team_id: all_teams["LAD"].id, date: Date.new(2020, 8, 12), game_week_id: GameWeek.by_date(season, Date.new(2020, 8, 12)).id },
+      { team_id: all_teams["NYM"].id, date: Date.new(2020, 8, 13), game_week_id: GameWeek.by_date(season, Date.new(2020, 8, 13)).id },
+      { team_id: all_teams["CIN"].id, date: Date.new(2020, 8, 14), game_week_id: GameWeek.by_date(season, Date.new(2020, 8, 14)).id },
+      { team_id: all_teams["COL"].id, date: Date.new(2020, 8, 15), game_week_id: GameWeek.by_date(season, Date.new(2020, 8, 15)).id },
+      { team_id: all_teams["NYY"].id, date: Date.new(2020, 8, 16), game_week_id: GameWeek.by_date(season, Date.new(2020, 8, 16)).id }
     ] 
   },
   { 
@@ -431,7 +549,14 @@ users = [
       { team_id: all_teams["NYY"].id, date: Date.new(2020, 8, 6), game_week_id: GameWeek.by_date(season, Date.new(2020, 8, 6)).id },
       { team_id: all_teams["DET"].id, date: Date.new(2020, 8, 7), game_week_id: GameWeek.by_date(season, Date.new(2020, 8, 7)).id },
       { team_id: all_teams["HOU"].id, date: Date.new(2020, 8, 8), game_week_id: GameWeek.by_date(season, Date.new(2020, 8, 8)).id },
-      { team_id: all_teams["CHC"].id, date: Date.new(2020, 8, 9), game_week_id: GameWeek.by_date(season, Date.new(2020, 8, 9)).id }
+      { team_id: all_teams["CHC"].id, date: Date.new(2020, 8, 9), game_week_id: GameWeek.by_date(season, Date.new(2020, 8, 9)).id },
+      { team_id: all_teams["LAD"].id, date: Date.new(2020, 8, 10), game_week_id: GameWeek.by_date(season, Date.new(2020, 8, 10)).id },
+      { team_id: all_teams["NYM"].id, date: Date.new(2020, 8, 11), game_week_id: GameWeek.by_date(season, Date.new(2020, 8, 11)).id },
+      { team_id: all_teams["NYY"].id, date: Date.new(2020, 8, 12), game_week_id: GameWeek.by_date(season, Date.new(2020, 8, 12)).id },
+      { team_id: all_teams["MIL"].id, date: Date.new(2020, 8, 13), game_week_id: GameWeek.by_date(season, Date.new(2020, 8, 13)).id },
+      { team_id: all_teams["HOU"].id, date: Date.new(2020, 8, 14), game_week_id: GameWeek.by_date(season, Date.new(2020, 8, 14)).id },
+      { team_id: all_teams["KAN"].id, date: Date.new(2020, 8, 15), game_week_id: GameWeek.by_date(season, Date.new(2020, 8, 15)).id },
+      { team_id: all_teams["COL"].id, date: Date.new(2020, 8, 16), game_week_id: GameWeek.by_date(season, Date.new(2020, 8, 16)).id }
     ] 
   },
   { 
@@ -457,7 +582,14 @@ users = [
       { team_id: all_teams["MIN"].id, date: Date.new(2020, 8, 6), game_week_id: GameWeek.by_date(season, Date.new(2020, 8, 6)).id },
       { team_id: all_teams["CHC"].id, date: Date.new(2020, 8, 7), game_week_id: GameWeek.by_date(season, Date.new(2020, 8, 7)).id },
       { team_id: all_teams["SD"].id, date: Date.new(2020, 8, 8), game_week_id: GameWeek.by_date(season, Date.new(2020, 8, 8)).id },
-      { team_id: all_teams["MIL"].id, date: Date.new(2020, 8, 9), game_week_id: GameWeek.by_date(season, Date.new(2020, 8, 9)).id }
+      { team_id: all_teams["MIL"].id, date: Date.new(2020, 8, 9), game_week_id: GameWeek.by_date(season, Date.new(2020, 8, 9)).id },
+      { team_id: all_teams["LAD"].id, date: Date.new(2020, 8, 10), game_week_id: GameWeek.by_date(season, Date.new(2020, 8, 10)).id },
+      { team_id: all_teams["HOU"].id, date: Date.new(2020, 8, 11), game_week_id: GameWeek.by_date(season, Date.new(2020, 8, 11)).id },
+      { team_id: all_teams["OAK"].id, date: Date.new(2020, 8, 12), game_week_id: GameWeek.by_date(season, Date.new(2020, 8, 12)).id },
+      { team_id: all_teams["DET"].id, date: Date.new(2020, 8, 13), game_week_id: GameWeek.by_date(season, Date.new(2020, 8, 13)).id },
+      { team_id: all_teams["COL"].id, date: Date.new(2020, 8, 14), game_week_id: GameWeek.by_date(season, Date.new(2020, 8, 14)).id },
+      { team_id: all_teams["CHC"].id, date: Date.new(2020, 8, 15), game_week_id: GameWeek.by_date(season, Date.new(2020, 8, 15)).id },
+      { team_id: all_teams["NYY"].id, date: Date.new(2020, 8, 16), game_week_id: GameWeek.by_date(season, Date.new(2020, 8, 16)).id }
     ] 
   },
   { 
@@ -483,7 +615,14 @@ users = [
       { team_id: all_teams["MIN"].id, date: Date.new(2020, 8, 6), game_week_id: GameWeek.by_date(season, Date.new(2020, 8, 6)).id },
       { team_id: all_teams["LAD"].id, date: Date.new(2020, 8, 7), game_week_id: GameWeek.by_date(season, Date.new(2020, 8, 7)).id },
       { team_id: all_teams["SD"].id, date: Date.new(2020, 8, 8), game_week_id: GameWeek.by_date(season, Date.new(2020, 8, 8)).id },
-      { team_id: all_teams["NYM"].id, date: Date.new(2020, 8, 9), game_week_id: GameWeek.by_date(season, Date.new(2020, 8, 9)).id }
+      { team_id: all_teams["NYM"].id, date: Date.new(2020, 8, 9), game_week_id: GameWeek.by_date(season, Date.new(2020, 8, 9)).id },
+      { team_id: all_teams["HOU"].id, date: Date.new(2020, 8, 10), game_week_id: GameWeek.by_date(season, Date.new(2020, 8, 10)).id },
+      { team_id: all_teams["PHI"].id, date: Date.new(2020, 8, 11), game_week_id: GameWeek.by_date(season, Date.new(2020, 8, 11)).id },
+      { team_id: all_teams["LAD"].id, date: Date.new(2020, 8, 12), game_week_id: GameWeek.by_date(season, Date.new(2020, 8, 12)).id },
+      { team_id: all_teams["CIN"].id, date: Date.new(2020, 8, 13), game_week_id: GameWeek.by_date(season, Date.new(2020, 8, 13)).id },
+      { team_id: all_teams["MIN"].id, date: Date.new(2020, 8, 14), game_week_id: GameWeek.by_date(season, Date.new(2020, 8, 14)).id },
+      { team_id: all_teams["OAK"].id, date: Date.new(2020, 8, 15), game_week_id: GameWeek.by_date(season, Date.new(2020, 8, 15)).id },
+      { team_id: all_teams["WAS"].id, date: Date.new(2020, 8, 16), game_week_id: GameWeek.by_date(season, Date.new(2020, 8, 16)).id }
     ] 
   }
 ]
@@ -878,6 +1017,143 @@ Winner.find_or_create_by(team: all_teams["CWS"], status: :loser, date: Date.new(
 
 Winner.find_or_create_by(team: all_teams["BAL"], status: :winner, date: Date.new(2020, 8, 7))
 Winner.find_or_create_by(team: all_teams["WAS"], status: :loser, date: Date.new(2020, 8, 7))
+Winner.find_or_create_by(team: all_teams["TB"], status: :winner, date: Date.new(2020, 8, 7))
+Winner.find_or_create_by(team: all_teams["NYY"], status: :loser, date: Date.new(2020, 8, 7))
+Winner.find_or_create_by(team: all_teams["DET"], status: :winner, date: Date.new(2020, 8, 7))
+Winner.find_or_create_by(team: all_teams["PIT"], status: :loser, date: Date.new(2020, 8, 7))
+Winner.find_or_create_by(team: all_teams["FLA"], status: :winner, date: Date.new(2020, 8, 7))
+Winner.find_or_create_by(team: all_teams["NYM"], status: :loser, date: Date.new(2020, 8, 7))
+Winner.find_or_create_by(team: all_teams["BOS"], status: :winner, date: Date.new(2020, 8, 7))
+Winner.find_or_create_by(team: all_teams["TOR"], status: :loser, date: Date.new(2020, 8, 7))
+Winner.find_or_create_by(team: all_teams["KAN"], status: :winner, date: Date.new(2020, 8, 7))
+Winner.find_or_create_by(team: all_teams["MIN"], status: :loser, date: Date.new(2020, 8, 7))
+Winner.find_or_create_by(team: all_teams["CIN"], status: :winner, date: Date.new(2020, 8, 7))
+Winner.find_or_create_by(team: all_teams["MIL"], status: :loser, date: Date.new(2020, 8, 7))
+Winner.find_or_create_by(team: all_teams["CWS"], status: :winner, date: Date.new(2020, 8, 7))
+Winner.find_or_create_by(team: all_teams["CLE"], status: :loser, date: Date.new(2020, 8, 7))
+Winner.find_or_create_by(team: all_teams["TEX"], status: :winner, date: Date.new(2020, 8, 7))
+Winner.find_or_create_by(team: all_teams["LAA"], status: :loser, date: Date.new(2020, 8, 7))
+Winner.find_or_create_by(team: all_teams["SD"], status: :winner, date: Date.new(2020, 8, 7))
+Winner.find_or_create_by(team: all_teams["ARI"], status: :loser, date: Date.new(2020, 8, 7))
+Winner.find_or_create_by(team: all_teams["OAK"], status: :winner, date: Date.new(2020, 8, 7))
+Winner.find_or_create_by(team: all_teams["HOU"], status: :loser, date: Date.new(2020, 8, 7))
+Winner.find_or_create_by(team: all_teams["COL"], status: :winner, date: Date.new(2020, 8, 7))
+Winner.find_or_create_by(team: all_teams["SEA"], status: :loser, date: Date.new(2020, 8, 7))
+Winner.find_or_create_by(team: all_teams["LAD"], status: :winner, date: Date.new(2020, 8, 7))
+Winner.find_or_create_by(team: all_teams["SF"], status: :loser, date: Date.new(2020, 8, 7))
+
+Winner.find_or_create_by(team: all_teams["NYY"], status: :winner, date: Date.new(2020, 8, 8))
+Winner.find_or_create_by(team: all_teams["TB"], status: :loser, date: Date.new(2020, 8, 8))
+Winner.find_or_create_by(team: all_teams["CLE"], status: :winner, date: Date.new(2020, 8, 8))
+Winner.find_or_create_by(team: all_teams["CWS"], status: :loser, date: Date.new(2020, 8, 8))
+Winner.find_or_create_by(team: all_teams["DET"], status: :winner, date: Date.new(2020, 8, 8))
+Winner.find_or_create_by(team: all_teams["PIT"], status: :loser, date: Date.new(2020, 8, 8))
+Winner.find_or_create_by(team: all_teams["OAK"], status: :winner, date: Date.new(2020, 8, 8))
+Winner.find_or_create_by(team: all_teams["HOU"], status: :loser, date: Date.new(2020, 8, 8))
+Winner.find_or_create_by(team: all_teams["BAL"], status: :winner, date: Date.new(2020, 8, 8))
+Winner.find_or_create_by(team: all_teams["WAS"], status: :loser, date: Date.new(2020, 8, 8))
+Winner.find_or_create_by(team: all_teams["PHI"], status: :winner, date: Date.new(2020, 8, 8))
+Winner.find_or_create_by(team: all_teams["ATL"], status: :loser, date: Date.new(2020, 8, 8))
+Winner.find_or_create_by(team: all_teams["TEX"], status: :winner, date: Date.new(2020, 8, 8))
+Winner.find_or_create_by(team: all_teams["LAA"], status: :loser, date: Date.new(2020, 8, 8))
+Winner.find_or_create_by(team: all_teams["KAN"], status: :winner, date: Date.new(2020, 8, 8))
+Winner.find_or_create_by(team: all_teams["MIN"], status: :loser, date: Date.new(2020, 8, 8))
+Winner.find_or_create_by(team: all_teams["NYM"], status: :winner, date: Date.new(2020, 8, 8))
+Winner.find_or_create_by(team: all_teams["FLA"], status: :loser, date: Date.new(2020, 8, 8))
+Winner.find_or_create_by(team: all_teams["CIN"], status: :winner, date: Date.new(2020, 8, 8))
+Winner.find_or_create_by(team: all_teams["MIL"], status: :loser, date: Date.new(2020, 8, 8))
+Winner.find_or_create_by(team: all_teams["TOR"], status: :winner, date: Date.new(2020, 8, 8))
+Winner.find_or_create_by(team: all_teams["BOS"], status: :loser, date: Date.new(2020, 8, 8))
+Winner.find_or_create_by(team: all_teams["COL"], status: :winner, date: Date.new(2020, 8, 8))
+Winner.find_or_create_by(team: all_teams["SEA"], status: :loser, date: Date.new(2020, 8, 8))
+Winner.find_or_create_by(team: all_teams["ARI"], status: :winner, date: Date.new(2020, 8, 8))
+Winner.find_or_create_by(team: all_teams["SD"], status: :loser, date: Date.new(2020, 8, 8))
+Winner.find_or_create_by(team: all_teams["SF"], status: :winner, date: Date.new(2020, 8, 8))
+Winner.find_or_create_by(team: all_teams["LAD"], status: :loser, date: Date.new(2020, 8, 8))
+Winner.find_or_create_by(team: all_teams["TB"], status: :winner, date: Date.new(2020, 8, 6))
+Winner.find_or_create_by(team: all_teams["NYY"], status: :loser, date: Date.new(2020, 8, 6))
+
+Winner.find_or_create_by(team: all_teams["ATL"], status: :winner, date: Date.new(2020, 8, 9))
+Winner.find_or_create_by(team: all_teams["PHI"], status: :loser, date: Date.new(2020, 8, 9))
+Winner.find_or_create_by(team: all_teams["TB"], status: :winner, date: Date.new(2020, 8, 9))
+Winner.find_or_create_by(team: all_teams["NYY"], status: :loser, date: Date.new(2020, 8, 9))
+Winner.find_or_create_by(team: all_teams["NYM"], status: :winner, date: Date.new(2020, 8, 9))
+Winner.find_or_create_by(team: all_teams["FLA"], status: :loser, date: Date.new(2020, 8, 9))
+Winner.find_or_create_by(team: all_teams["DET"], status: :winner, date: Date.new(2020, 8, 9))
+Winner.find_or_create_by(team: all_teams["PIT"], status: :loser, date: Date.new(2020, 8, 9))
+Winner.find_or_create_by(team: all_teams["BOS"], status: :winner, date: Date.new(2020, 8, 9))
+Winner.find_or_create_by(team: all_teams["TOR"], status: :loser, date: Date.new(2020, 8, 9))
+Winner.find_or_create_by(team: all_teams["KAN"], status: :winner, date: Date.new(2020, 8, 9))
+Winner.find_or_create_by(team: all_teams["MIN"], status: :loser, date: Date.new(2020, 8, 9))
+Winner.find_or_create_by(team: all_teams["MIL"], status: :winner, date: Date.new(2020, 8, 9))
+Winner.find_or_create_by(team: all_teams["CIN"], status: :loser, date: Date.new(2020, 8, 9))
+Winner.find_or_create_by(team: all_teams["TEX"], status: :winner, date: Date.new(2020, 8, 9))
+Winner.find_or_create_by(team: all_teams["LAA"], status: :loser, date: Date.new(2020, 8, 9))
+Winner.find_or_create_by(team: all_teams["SEA"], status: :winner, date: Date.new(2020, 8, 9))
+Winner.find_or_create_by(team: all_teams["COL"], status: :loser, date: Date.new(2020, 8, 9))
+Winner.find_or_create_by(team: all_teams["SD"], status: :winner, date: Date.new(2020, 8, 9))
+Winner.find_or_create_by(team: all_teams["ARI"], status: :loser, date: Date.new(2020, 8, 9))
+Winner.find_or_create_by(team: all_teams["OAK"], status: :winner, date: Date.new(2020, 8, 9))
+Winner.find_or_create_by(team: all_teams["HOU"], status: :loser, date: Date.new(2020, 8, 9))
+Winner.find_or_create_by(team: all_teams["LAD"], status: :winner, date: Date.new(2020, 8, 9))
+Winner.find_or_create_by(team: all_teams["SF"], status: :loser, date: Date.new(2020, 8, 9))
+Winner.find_or_create_by(team: all_teams["CLE"], status: :winner, date: Date.new(2020, 8, 9))
+Winner.find_or_create_by(team: all_teams["CWS"], status: :loser, date: Date.new(2020, 8, 9))
+Winner.find_or_create_by(team: all_teams["ATL"], status: :winner, date: Date.new(2020, 8, 7))
+Winner.find_or_create_by(team: all_teams["PHI"], status: :loser, date: Date.new(2020, 8, 7))
+#Winner.find_or_create_by(team: all_teams["BAL"], status: :winner, date: Date.new(2020, 8, 9))
+#Winner.find_or_create_by(team: all_teams["WAS"], status: :loser, date: Date.new(2020, 8, 9))
+#i think this game was played on 8/11, but was also suspended on 8/11?
+
+Winner.find_or_create_by(team: all_teams["PHI"], status: :winner, date: Date.new(2020, 8, 10))
+Winner.find_or_create_by(team: all_teams["ATL"], status: :loser, date: Date.new(2020, 8, 10))
+Winner.find_or_create_by(team: all_teams["WAS"], status: :winner, date: Date.new(2020, 8, 10))
+Winner.find_or_create_by(team: all_teams["NYM"], status: :loser, date: Date.new(2020, 8, 10))
+Winner.find_or_create_by(team: all_teams["DET"], status: :winner, date: Date.new(2020, 8, 10))
+Winner.find_or_create_by(team: all_teams["CWS"], status: :loser, date: Date.new(2020, 8, 10))
+Winner.find_or_create_by(team: all_teams["TB"], status: :winner, date: Date.new(2020, 8, 10))
+Winner.find_or_create_by(team: all_teams["BOS"], status: :loser, date: Date.new(2020, 8, 10))
+Winner.find_or_create_by(team: all_teams["MIN"], status: :winner, date: Date.new(2020, 8, 10))
+Winner.find_or_create_by(team: all_teams["MIL"], status: :loser, date: Date.new(2020, 8, 10))
+Winner.find_or_create_by(team: all_teams["ARI"], status: :winner, date: Date.new(2020, 8, 10))
+Winner.find_or_create_by(team: all_teams["COL"], status: :loser, date: Date.new(2020, 8, 10))
+Winner.find_or_create_by(team: all_teams["SEA"], status: :winner, date: Date.new(2020, 8, 10))
+Winner.find_or_create_by(team: all_teams["TEX"], status: :loser, date: Date.new(2020, 8, 10))
+Winner.find_or_create_by(team: all_teams["HOU"], status: :winner, date: Date.new(2020, 8, 10))
+Winner.find_or_create_by(team: all_teams["SF"], status: :loser, date: Date.new(2020, 8, 10))
+Winner.find_or_create_by(team: all_teams["SD"], status: :winner, date: Date.new(2020, 8, 10))
+Winner.find_or_create_by(team: all_teams["LAD"], status: :loser, date: Date.new(2020, 8, 10))
+Winner.find_or_create_by(team: all_teams["LAA"], status: :winner, date: Date.new(2020, 8, 10))
+Winner.find_or_create_by(team: all_teams["OAK"], status: :loser, date: Date.new(2020, 8, 10))
+
+Winner.find_or_create_by(team: all_teams["SF"], status: :winner, date: Date.new(2020, 8, 11))
+Winner.find_or_create_by(team: all_teams["HOU"], status: :loser, date: Date.new(2020, 8, 11))
+Winner.find_or_create_by(team: all_teams["SD"], status: :winner, date: Date.new(2020, 8, 11))
+Winner.find_or_create_by(team: all_teams["LAD"], status: :loser, date: Date.new(2020, 8, 11))
+Winner.find_or_create_by(team: all_teams["TOR"], status: :winner, date: Date.new(2020, 8, 11))
+Winner.find_or_create_by(team: all_teams["FLA"], status: :loser, date: Date.new(2020, 8, 11))
+Winner.find_or_create_by(team: all_teams["CIN"], status: :winner, date: Date.new(2020, 8, 11))
+Winner.find_or_create_by(team: all_teams["KAN"], status: :loser, date: Date.new(2020, 8, 11))
+Winner.find_or_create_by(team: all_teams["BAL"], status: :winner, date: Date.new(2020, 8, 11))
+Winner.find_or_create_by(team: all_teams["PHI"], status: :loser, date: Date.new(2020, 8, 11))
+Winner.find_or_create_by(team: all_teams["NYY"], status: :winner, date: Date.new(2020, 8, 11))
+Winner.find_or_create_by(team: all_teams["ATL"], status: :loser, date: Date.new(2020, 8, 11))
+Winner.find_or_create_by(team: all_teams["WAS"], status: :winner, date: Date.new(2020, 8, 11))
+Winner.find_or_create_by(team: all_teams["NYM"], status: :loser, date: Date.new(2020, 8, 11))
+Winner.find_or_create_by(team: all_teams["CWS"], status: :winner, date: Date.new(2020, 8, 11))
+Winner.find_or_create_by(team: all_teams["DET"], status: :loser, date: Date.new(2020, 8, 11))
+Winner.find_or_create_by(team: all_teams["CHC"], status: :winner, date: Date.new(2020, 8, 11))
+Winner.find_or_create_by(team: all_teams["CLE"], status: :loser, date: Date.new(2020, 8, 11))
+Winner.find_or_create_by(team: all_teams["TB"], status: :winner, date: Date.new(2020, 8, 11))
+Winner.find_or_create_by(team: all_teams["BOS"], status: :loser, date: Date.new(2020, 8, 11))
+Winner.find_or_create_by(team: all_teams["MIL"], status: :winner, date: Date.new(2020, 8, 11))
+Winner.find_or_create_by(team: all_teams["MIN"], status: :loser, date: Date.new(2020, 8, 11))
+Winner.find_or_create_by(team: all_teams["COL"], status: :winner, date: Date.new(2020, 8, 11))
+Winner.find_or_create_by(team: all_teams["ARI"], status: :loser, date: Date.new(2020, 8, 11))
+Winner.find_or_create_by(team: all_teams["TEX"], status: :winner, date: Date.new(2020, 8, 11))
+Winner.find_or_create_by(team: all_teams["SEA"], status: :loser, date: Date.new(2020, 8, 11))
+Winner.find_or_create_by(team: all_teams["LAA"], status: :winner, date: Date.new(2020, 8, 11))
+Winner.find_or_create_by(team: all_teams["OAK"], status: :loser, date: Date.new(2020, 8, 11))
 
 Winner.all.each do |winner|
   WinnerPicksJob.perform_now(winner)
