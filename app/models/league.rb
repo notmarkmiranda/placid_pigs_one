@@ -9,7 +9,7 @@ class League < ApplicationRecord
   validates_uniqueness_of :name, case_sensitive: false
 
   def role_for_user(user)
-    memberships.find_by(user: user).role
+    memberships.find_by(user: user)&.role
   end
 
   private
