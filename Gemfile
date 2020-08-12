@@ -11,9 +11,9 @@ gem "webpacker", "~> 4.0"
 gem "jbuilder", "~> 2.7"
 gem "bootsnap", ">= 1.4.2", require: false
 
-#gem "bootstrap", "~> 4.5.0"
 gem "devise"
 gem "draper"
+gem "figaro"
 gem "font-awesome-rails"
 gem "jquery-rails"
 gem "pundit"
