@@ -40,8 +40,21 @@ all_teams = teams.each_with_object({}) do |team, acc|
   puts "#{new_team.city} #{new_team.name}"
 end
 
-season = Season.find(1)
-league = season.league
+first_user = {
+    email: "markmiranda51@gmail.com", 
+    first_name: "Mark",
+    last_name: "Miranda",
+    password: SecureRandom.hex(6),
+}
+
+mark = User.find_or_initialize_by(email: first_user[:email])
+mark.first_name = first_user[:first_name]
+mark.last_name = first_user[:last_name]
+mark.password = first_user[:password]
+mark.save!
+
+league = League.find_or_create_by(name: "MH / MM Super Duper", owner: mark)
+season = Season.find_or_create_by(start_date: Date.new(2020, 7, 23), end_date: Date.new(2020, 9, 29), offset: 4, increment_lock: 7, league: league, name: "COVID19 - 2020")
 
 users = [
   { 
@@ -1113,10 +1126,10 @@ Winner.find_or_create_by(team: all_teams["LAD"], status: :loser, date: Date.new(
 Winner.find_or_create_by(team: all_teams["LAA"], status: :winner, date: Date.new(2020, 8, 10))
 Winner.find_or_create_by(team: all_teams["OAK"], status: :loser, date: Date.new(2020, 8, 10))
 
-#Winner.find_or_create_by(team: all_teams["SF"], status: :winner, date: Date.new(2020, 8, 11))
-#Winner.find_or_create_by(team: all_teams["HOU"], status: :loser, date: Date.new(2020, 8, 11))
-#Winner.find_or_create_by(team: all_teams["SD"], status: :winner, date: Date.new(2020, 8, 11))
-#Winner.find_or_create_by(team: all_teams["LAD"], status: :loser, date: Date.new(2020, 8, 11))
+Winner.find_or_create_by(team: all_teams["SF"], status: :winner, date: Date.new(2020, 8, 11))
+Winner.find_or_create_by(team: all_teams["HOU"], status: :loser, date: Date.new(2020, 8, 11))
+Winner.find_or_create_by(team: all_teams["SD"], status: :winner, date: Date.new(2020, 8, 11))
+Winner.find_or_create_by(team: all_teams["LAD"], status: :loser, date: Date.new(2020, 8, 11))
 Winner.find_or_create_by(team: all_teams["TOR"], status: :winner, date: Date.new(2020, 8, 11))
 Winner.find_or_create_by(team: all_teams["FLA"], status: :loser, date: Date.new(2020, 8, 11))
 Winner.find_or_create_by(team: all_teams["CIN"], status: :winner, date: Date.new(2020, 8, 11))
