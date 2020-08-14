@@ -10,4 +10,8 @@ class UserDecorator < ApplicationDecorator
       "something"
     end
   end
+
+  def is_current_user?(user)
+    "bg-dark text-white" if object == user
+  end
 end

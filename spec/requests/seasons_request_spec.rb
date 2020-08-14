@@ -3,7 +3,7 @@ require "rails_helper"
 describe SeasonsController, type: :request do
   let(:membership) { create(:membership, role: 1) }
   let(:league) { membership.league }
-  let(:user) { membership.user }
+  let!(:user) { membership.user }
   let!(:season) { create(:season, league: league) }
 
   before { sign_in(user) }

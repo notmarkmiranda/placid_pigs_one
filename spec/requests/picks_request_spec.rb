@@ -11,7 +11,7 @@ describe PicksController, type: :request do
   before { sign_in(user) }
 
   describe "GET#index" do
-    subject(:get_index) { get picks_path }
+    subject(:get_index) { get picks_path(season_id: season.id) }
 
     it "has 200 status" do
       get_index

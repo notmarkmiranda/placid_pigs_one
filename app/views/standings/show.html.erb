@@ -11,7 +11,7 @@
         <th>Points</th>
       </tr>
       <% @standings.each_with_index do |standing, index| %>
-        <tr>
+        <tr class="<%= standing.is_current_user?(current_user) %>">
           <td><%= index + 1 %></td>
           <td><%= standing.identifier %></td>
           <td><%= standing.pick_count %></td>

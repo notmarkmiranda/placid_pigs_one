@@ -11,6 +11,7 @@ class PicksController < ApplicationController
       .picks
       .where(game_week: GameWeek.where(season_id: @season.id))
       .order(date: :asc)
+    @other_picks = Pick.where(game_week: @season.game_weeks).where.not(user: current_user)
   end
 
   def create
