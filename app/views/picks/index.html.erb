@@ -1,0 +1,96 @@
+<div class="container">
+  <div class="button-actions-row">
+    <%= link_to "Back to Season", @season, class: "btn btn-outline-primary btn-sm" %>
+    <% if params[:view_all] == "true" %>
+      <%= link_to "Just My Picks", picks_path(season_id: @season.id), class: "btn btn-outline-primary btn-sm" %>
+    <% else %>
+      <%= link_to "View Everyone's Picks", picks_path(season_id: @season.id, view_all: true), class: "btn btn-outline-primary btn-sm" %>
+    <% end %>
+  </div>
+  <div class="table-responsive">
+    <table class="table table-sm">
+      <tr>
+        <th>Week</th>
+        <th>Date</th>
+        <th>Your pick</th>
+        <% if params[:view_all] == "true" %>
+          <% @season.other_users(current_user.id).each do |user| %>
+            <td class="nowrap"><%= user.identifier %></td>
+          <% end %>
+        <% end %>
+      </tr>
+      <% @game_weeks.each_with_index do |game_week, index| %>
+        <tr>
+          <td rowspan=<%= game_week.rowspan %>><%= index + 1 %></td>
+        </tr>
+          <% game_week.all_dates.each do |date| %>
+          <tr>
+            <td>
+              <% if params[:view_all] == "true" %>
+                <%= short_date(date) %>
+              <% else %>
+                <%= formatted_date_with_day(date) %>
+              <% end %>
+            </td>
+            <% pick = @picks.find_by(date: date) %>
+            <% if pick %>
+              <td class="<%= pick.winner_css %> existing_pick nowrap">
+                <% if params[:view_all] == "true" %>
+                  <%= pick.team_abbreviation %>
+                <% else %>
+                  <%= pick.team_full_name %>
+                <% end %>
+                <% unless game_week.locked? %>
+                  <%= button_to pick, method: :delete, class: "btn btn-outline-danger btn-sm", form_class: "delete_pick" do %>
+                    <%= fa_icon "times fw" %>
+                  <% end %>
+                <% end %>
+              </td>
+            <% else %>
+              <% if game_week.locked? %>
+                <td>No Pick</td>
+              <% else %>
+                <td>
+                  <%= form_for Pick.new, html: { class: "new-pick" } do |f| %>
+                    <%= f.hidden_field :game_week_id, value: game_week.id %>
+                    <%= f.hidden_field :date, value: date %>
+                    <div class="form-group select-new-pick">
+                      <%= f.collection_select(:team_id, Team.all.decorate, :id, :full_name, {include_blank: true}, {class: "form-control"}) %>
+                      <%= button_tag class: "btn btn-outline-primary btn-sm" do %>
+                        <%= fa_icon "check fw" %>
+                      <% end %>
+                    </div>
+                  <% end %>
+                </td>
+              <% end %>
+            <% end %>
+
+            <!--// Other user's picks //-->
+            <% if params[:view_all] == "true" %>
+              <% @season.other_users(current_user.id).each do |user| %>
+                <% if game_week.locked? %>
+                  <% pick = @other_picks.by_date(date, user) %>
+                  <% if pick %>
+                    <td class="<%= pick.winner_css %> existin_pick nowrap">
+                      <%= pick.team_abbreviation %>
+                    </td>
+                  <% else %>
+                    <td>
+                      No pick
+                    </td>
+                  <% end %>
+                <% else %>
+                  <td>
+
+                  </td>
+                <% end %>
+              <% end %>
+            <% end %>
+            <!--// Other user's picks //-->
+          </tr>
+        <% end %>
+      <% end %>
+    </table>
+  </div>
+</div>
+

@@ -10,6 +10,16 @@ describe PicksController, type: :request do
 
   before { sign_in(user) }
 
+  describe "GET#index" do
+    subject(:get_index) { get picks_path(season_id: season.id) }
+
+    it "has 200 status" do
+      get_index
+
+      expect(response).to have_http_status(200)
+    end
+  end
+
   describe "POST#create" do
     subject(:post_create) { post picks_path, params: pick_attrs }
 

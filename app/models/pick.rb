@@ -18,6 +18,14 @@ class Pick < ApplicationRecord
     end
   end
 
+  def team_full_name
+    team.decorate.full_name
+  end
+
+  def team_abbreviation
+    team.abbreviation
+  end
+
   def winner_css
     winner = Winner.find_by(team_id: team_id, date: date)
     if winner&.winner?

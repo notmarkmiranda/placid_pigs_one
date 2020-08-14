@@ -7,6 +7,10 @@ module DateHelper
     date&.strftime("%B %e, %Y")
   end
 
+  def short_date(date)
+    date&.strftime("%m/%d/%Y")
+  end
+
   def season_days(season)
     (season.end_date - season.start_date).to_i + 1
   end

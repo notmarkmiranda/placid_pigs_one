@@ -18,6 +18,12 @@ class Season < ApplicationRecord
     users.sort_by { |u| u.email }
   end
 
+  def position_for_current_user(user)
+    ordered_standings = standings
+    index = ordered_standings.index(user) || 98
+    { place: index + 1, object: ordered_standings[index]&.decorate }
+  end
+
   def standings(limit=nil)
     User
       .joins(:picks)
