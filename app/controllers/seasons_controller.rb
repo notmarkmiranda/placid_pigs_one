@@ -4,6 +4,8 @@ class SeasonsController < ApplicationController
   def show
     @season = Season.find(params[:id]).decorate
     authorize @season
+    today = Date.today.in_time_zone("America/Denver").to_date
+    @current_week = (today..(today + 7.days)).to_a
     @all_picks = Pick.where(game_week_id: @season.game_weeks.map(&:id))
   end 
 

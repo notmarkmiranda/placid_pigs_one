@@ -3,6 +3,16 @@ class PicksController < ApplicationController
 
   before_action :authenticate_user!
 
+  def index
+    @season = Season.find(params[:season_id])
+    @game_weeks = @season.game_weeks.order(start_date: :asc)
+    @dates = (@season.start_date..@season.end_date).to_a
+    @picks = current_user
+      .picks
+      .where(game_week: GameWeek.where(season_id: @season.id))
+      .order(date: :asc)
+  end
+
   def create
     @game_week = GameWeek.find(pick_params[:game_week_id])
     @pick = current_user.picks.new(pick_params)

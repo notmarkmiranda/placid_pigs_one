@@ -17,7 +17,7 @@
             </a>
           </td>
         </tr>
-        <% Team.all.each do |team| %>
+        <% Team.all.decorate.each do |team| %>
           <% winner = @winners.find_by(team: team, date: date) %>
         <tr>
           <td class="team-cell">

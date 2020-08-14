@@ -11,7 +11,7 @@ Rails.application.routes.draw do
       get 'standings', to: 'standings#show'
     end
   end
-  resources :picks, only: [:create, :destroy]
+  resources :picks, only: [:index, :create, :destroy]
 
   namespace :admin do
     get "/winners", to: "winners#index", as: "winners"

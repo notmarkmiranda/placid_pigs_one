@@ -3,15 +3,10 @@ require "rails_helper"
 describe Team, type: :model do
   describe "relationships" do
     it { should have_many :winners }
+    it { should have_many :picks }
   end
 
   describe "methods" do
-    describe "#full_name" do
-      let(:team) { Team.new(abbreviation: "LAD", city: "Los Angeles", name: "Dodgers") }
-
-      it "shows a team's full name" do
-        expect(team.full_name).to eq("Los Angeles Dodgers")
-      end
-    end
+    pending ".most_by_season_and_date"
   end
 end

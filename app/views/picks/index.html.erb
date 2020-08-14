@@ -1,0 +1,53 @@
+<div class="container">
+  <div class="button-actions-row">
+    <%= link_to "Back to Season", @season, class: "btn btn-outline-primary btn-sm" %>
+  </div>
+  <div class="table-responsive">
+    <table class="table table-sm">
+      <tr>
+        <th>Week</th>
+        <th>Date</th>
+        <th>Your pick</th>
+      </tr>
+      <% @game_weeks.each_with_index do |game_week, index| %>
+        <tr>
+          <td rowspan=<%= game_week.rowspan %>><%= index + 1 %></td>
+        </tr>
+          <% game_week.all_dates.each do |date| %>
+          <tr>
+            <td><%= formatted_date_with_day(date) %></td>
+            <% pick = @picks.find_by(date: date) %>
+            <% if pick %>
+              <td class="<%= pick.winner_css %> existing_pick nowrap">
+                <%= pick.team_full_name %>
+                <% unless game_week.locked? %>
+                  <%= button_to pick, method: :delete, class: "btn btn-outline-danger", form_class: "delete_pick" do %>
+                    <%= fa_icon "times fw" %>
+                  <% end %>
+                <% end %>
+              </td>
+            <% else %>
+              <% if game_week.locked? %>
+                <td>No Pick</td>
+              <% else %>
+                <td>
+                  <%= form_for Pick.new, html: { class: "new-pick" } do |f| %>
+                    <%= f.hidden_field :game_week_id, value: game_week.id %>
+                    <%= f.hidden_field :date, value: date %>
+                    <div class="form-group select-new-pick">
+                      <%= f.collection_select(:team_id, Team.all.decorate, :id, :full_name, {include_blank: true}, {class: "form-control"}) %>
+                      <%= button_tag class: "btn btn-outline-primary" do %>
+                        <%= fa_icon "check fw" %>
+                      <% end %>
+                    </div>
+                  <% end %>
+                </td>
+              <% end %>
+            <% end %>
+        </tr>
+          <% end %>
+      <% end %>
+    </table>
+  </div>
+</div>
+
