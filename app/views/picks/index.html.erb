@@ -19,6 +19,15 @@
           <% end %>
         <% end %>
       </tr>
+      <% if params[:view_all] == "true" %>
+        <tr class="bg-secondary text-white">
+          <td colspan="2">Points</td>
+          <td><%= @season.points_for_user(current_user) %></td>
+          <% @season.other_users(current_user.id).each do |user| %>
+            <td><%= @season.points_for_user(user) %></td>
+          <% end %>
+        </tr>
+      <% end %>
       <% @game_weeks.each_with_index do |game_week, index| %>
         <tr>
           <td rowspan=<%= game_week.rowspan %>><%= index + 1 %></td>
