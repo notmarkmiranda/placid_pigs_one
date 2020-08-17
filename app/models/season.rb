@@ -18,6 +18,10 @@ class Season < ApplicationRecord
     users.sort_by { |u| u.email }
   end
 
+  def points_for_user(user)
+    standings.find(user.id).pick_count
+  end
+
   def position_for_current_user(user)
     ordered_standings = standings
     index = ordered_standings.index(user) || 98
