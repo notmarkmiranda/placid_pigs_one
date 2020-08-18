@@ -25,16 +25,16 @@ class Season < ApplicationRecord
   def position_for_current_user(user)
     ordered_standings = standings
     index = ordered_standings.index(user) || 98
-    { place: index + 1, object: ordered_standings[index]&.decorate }
+    {place: index + 1, object: ordered_standings[index]&.decorate}
   end
 
-  def standings(limit=nil)
+  def standings(limit = nil)
     User
       .joins(:picks)
-      .where(picks: { status: :winner, game_week: game_weeks })
-      .select('users.*, count(picks.id) as pick_count')
-      .group('users.id')
-      .order('count(picks.id) DESC')
+      .where(picks: {status: :winner, game_week: game_weeks})
+      .select("users.*, count(picks.id) as pick_count")
+      .group("users.id")
+      .order("count(picks.id) DESC")
       .limit(limit)
   end
 

@@ -12,6 +12,6 @@ class PickPolicy < ApplicationPolicy
   private
 
   def league
-    record&.game_week.season.league
+    record&.game_week&.season&.league
   end
 end

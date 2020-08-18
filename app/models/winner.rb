@@ -6,6 +6,6 @@ class Winner < ApplicationRecord
   enum status: {no_status: 0, winner: 1, loser: 2}
 
   def self.exists_for_date?(team, date, status)
-    find_by(team: team, date:date, status: status)
+    find_by(team: team, date: date, status: status)
   end
 end

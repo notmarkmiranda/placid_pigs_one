@@ -10,7 +10,7 @@ class Pick < ApplicationRecord
 
   enum status: {no_status: 0, winner: 1, loser: 2}
 
-  def self.by_date(date, user_id=nil)
+  def self.by_date(date, user_id = nil)
     if user_id
       find_by(date: date, user_id: user_id)
     else

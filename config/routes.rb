@@ -8,7 +8,7 @@ Rails.application.routes.draw do
   resources :leagues
   resources :seasons, except: [:index] do
     member do
-      get 'standings', to: 'standings#show'
+      get "standings", to: "standings#show"
     end
   end
   resources :picks, only: [:index, :create, :destroy]

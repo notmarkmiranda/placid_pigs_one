@@ -6,10 +6,10 @@ describe Admin::WinnersController, type: :request do
 
   before { login_as(user) }
 
-  describe 'GET#index' do
+  describe "GET#index" do
     subject(:get_index) { get admin_winners_path }
 
-    it 'has 200 status' do
+    it "has 200 status" do
       get_index
 
       expect(response).to have_http_status(200)
@@ -18,7 +18,7 @@ describe Admin::WinnersController, type: :request do
 
   describe "POST#create" do
     let(:team) { create(:team) }
-    let(:winner_attrs) { { winner: attributes_for(:winner).merge(team_id: team.id) } }
+    let(:winner_attrs) { {winner: attributes_for(:winner).merge(team_id: team.id)} }
     subject(:post_create) { post admin_winners_path, params: winner_attrs }
 
     before do

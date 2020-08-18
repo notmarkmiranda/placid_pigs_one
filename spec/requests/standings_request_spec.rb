@@ -7,7 +7,7 @@ describe StandingsController, type: :request do
 
   before { login_as(user) }
 
-  describe 'GET#show' do
+  describe "GET#show" do
     subject(:get_show) { get standings_season_path(season) }
     it "has 200 status" do
       get_show

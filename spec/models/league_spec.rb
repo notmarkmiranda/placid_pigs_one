@@ -18,7 +18,7 @@ describe League, type: :model do
     let(:league) { create(:league) }
 
     describe "#role_for_user" do
-      subject { league.role_for_user(user) } 
+      subject { league.role_for_user(user) }
 
       describe "for non-member" do
         let(:user) { create(:user) }

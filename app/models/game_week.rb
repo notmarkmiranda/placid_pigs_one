@@ -12,7 +12,6 @@ class GameWeek < ApplicationRecord
     start_date.to_datetime.change(hour: 16).in_time_zone("America/Denver")
   end
 
-
   def locked?
     DateTime.now.in_time_zone("America/Denver") > cutoff_time
   end
