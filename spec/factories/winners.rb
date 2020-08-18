@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :winner do
-    team 
+    team
     date { Date.new(2020, 7, 23) }
     status { :winner }
   end

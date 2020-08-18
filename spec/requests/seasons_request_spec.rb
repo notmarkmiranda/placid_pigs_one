@@ -36,17 +36,17 @@ describe SeasonsController, type: :request do
       let(:end_date) { Date.new(2020, 9, 27) }
       let(:offset) { 0 }
 
-      let(:season_attrs) do 
+      let(:season_attrs) do
         {
           season: attributes_for(
-            :season, 
-            start_date: start_date, 
+            :season,
+            start_date: start_date,
             end_date: end_date,
             offset: offset
           ).merge(
             league_id: league.id
           )
-        } 
+        }
       end
 
       it "has 302 status" do

@@ -21,7 +21,7 @@ describe Season, type: :model do
     describe "#all_dates" do
       subject { season.all_dates }
       it "returns array inclusive of start and end dates" do
-        expect(subject.count).to eq(3) 
+        expect(subject.count).to eq(3)
       end
 
       it "returns array of date objects" do
@@ -36,13 +36,13 @@ describe Season, type: :model do
       let!(:user_one) { season.league.owner }
 
       describe "when only one user exists" do
-          it "returns empty array" do
-            expect(season_other_users).to eq([])
-          end
+        it "returns empty array" do
+          expect(season_other_users).to eq([])
+        end
       end
 
       describe "with multiple users" do
-        let(:membership_two) { create(:membership, league: league) } 
+        let(:membership_two) { create(:membership, league: league) }
         let!(:user_two) { membership_two.user }
 
         it "returns array of another user" do

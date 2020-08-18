@@ -5,9 +5,9 @@ describe "Admin can create new season", type: :feature do
   let(:user) { membership.user }
   let(:league) { membership.league }
 
-  before do 
+  before do
     travel_to Time.local(2020, 5, 9)
-    login_as(user, scope: :user) 
+    login_as(user, scope: :user)
   end
 
   after do

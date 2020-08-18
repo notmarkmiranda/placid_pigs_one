@@ -9,7 +9,6 @@ task :send_reminders, [:email] => :environment do |t, args|
     tomorrow = DateTime.now.in_time_zone("America/Denver").to_date.tomorrow
     seasons = Season.where(active: true)
     seasons.each do |season|
-      league = season.league
       game_week_starts_tomorrow = GameWeek.find_by(season: season, start_date: tomorrow)
       next unless game_week_starts_tomorrow
       recipients = UserSeasonSetting.where(season: season, reminder_emails: true)

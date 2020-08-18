@@ -4,7 +4,7 @@ describe Winner, type: :model do
   describe "relationships" do
     it { should belong_to :team }
   end
-  
+
   describe "validations" do
     let(:enum_values) { [:no_status, :winner, :loser] }
     before { create(:winner) }
@@ -15,7 +15,7 @@ describe Winner, type: :model do
 
   describe "methods" do
     describe ".exists_for_date?" do
-      let(:winner) { create(:winner) } 
+      let(:winner) { create(:winner) }
       let(:team) { winner.team }
       let(:date) { winner.date }
       let(:status) { winner.status }
