@@ -1403,10 +1403,18 @@ Winner.find_or_create_by(team: all_teams["BOS"], status: :loser, date: Date.new(
 
 Winner.find_or_create_by(team: all_teams["STL"], status: :winner, date: Date.new(2020, 8, 17))
 Winner.find_or_create_by(team: all_teams["CHC"], status: :loser, date: Date.new(2020, 8, 17))
+Winner.find_or_create_by(team: all_teams["NYY"], status: :winner, date: Date.new(2020, 8, 17))
+Winner.find_or_create_by(team: all_teams["BOS"], status: :loser, date: Date.new(2020, 8, 17))
 Winner.find_or_create_by(team: all_teams["ATL"], status: :winner, date: Date.new(2020, 8, 17))
 Winner.find_or_create_by(team: all_teams["WAS"], status: :loser, date: Date.new(2020, 8, 17))
+Winner.find_or_create_by(team: all_teams["NYM"], status: :winner, date: Date.new(2020, 8, 17))
+Winner.find_or_create_by(team: all_teams["FLA"], status: :loser, date: Date.new(2020, 8, 17))
 Winner.find_or_create_by(team: all_teams["TOR"], status: :winner, date: Date.new(2020, 8, 17))
 Winner.find_or_create_by(team: all_teams["BAL"], status: :loser, date: Date.new(2020, 8, 17))
+Winner.find_or_create_by(team: all_teams["MIN"], status: :winner, date: Date.new(2020, 8, 17))
+Winner.find_or_create_by(team: all_teams["KAN"], status: :loser, date: Date.new(2020, 8, 17))
+Winner.find_or_create_by(team: all_teams["CWS"], status: :winner, date: Date.new(2020, 8, 17))
+Winner.find_or_create_by(team: all_teams["DET"], status: :loser, date: Date.new(2020, 8, 17))
 Winner.find_or_create_by(team: all_teams["CHC"], status: :winner, date: Date.new(2020, 8, 7))
 Winner.find_or_create_by(team: all_teams["STL"], status: :loser, date: Date.new(2020, 8, 7))
 
