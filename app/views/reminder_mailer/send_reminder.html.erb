@@ -1,0 +1,7 @@
+<p>Hey <%= @user.decorate.identifier %>!</p>
+
+<p>Your picks for the next <%= pluralize(@season.increment_lock, 'day') %> for <%= @season.name %> are due tomorrow!</p>
+
+<p>Set them <%= link_to "here", @season_url %>!</p>
+
+<p>If you want to unsubscribe from this email, my bad. I don't have that functionality built yet.</p>
