@@ -5,8 +5,13 @@ class User < ApplicationRecord
     :recoverable, :rememberable, :validatable
 
   has_many :leagues
+  has_many :seasons, through: :leagues
   has_many :memberships
   has_many :picks
+
+  def active_seasons
+    seasons.where(active: true)
+  end
 
   def user_leagues
     memberships.map(&:league)

@@ -1,4 +1,5 @@
 class Season < ApplicationRecord
+  include DateHelper
   belongs_to :league
   has_many :game_weeks, dependent: :destroy
 
@@ -11,6 +12,14 @@ class Season < ApplicationRecord
 
   def all_dates
     (start_date..end_date).to_a
+  end
+
+  def days_left
+    (end_date - today).to_i + 1 if end_date > today
+  end
+  
+  def league_name
+    league.name
   end
 
   def other_users(user_id)
@@ -36,6 +45,10 @@ class Season < ApplicationRecord
       .group("users.id")
       .order("count(picks.id) DESC")
       .limit(limit)
+  end
+
+  def player_count
+    standings.to_a.count
   end
 
   private
