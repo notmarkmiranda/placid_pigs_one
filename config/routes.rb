@@ -11,10 +11,13 @@ Rails.application.routes.draw do
       get "standings", to: "standings#show"
     end
   end
+
   resources :picks, only: [:index, :create, :destroy]
 
   namespace :admin do
-    get "/winners", to: "winners#index", as: "winners"
+    get "/winners", to: "winners#index"
     post "/winners", to: "winners#create"
   end
+
+  get "/unsubscribe", to: "unsubscribe#reminders"
 end

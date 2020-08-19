@@ -4,7 +4,8 @@ task :send_reminders, [:email] => :environment do |t, args|
     user = User.find_by(email: args[:email])
     next unless user
     season = Season.first
-    ReminderMailer.with(user: user, season: season).send_reminder.deliver_now
+    recipient = UserSeasonSetting.find_by(season: season, user: user)
+    ReminderMailer.with(user: user, season: season, recipient: recipient).send_reminder.deliver_now
   else
     tomorrow = DateTime.now.in_time_zone("America/Denver").to_date.tomorrow
     seasons = Season.where(active: true)
@@ -14,7 +15,7 @@ task :send_reminders, [:email] => :environment do |t, args|
       recipients = UserSeasonSetting.where(season: season, reminder_emails: true)
       recipients.each do |recipient|
         ReminderMailer
-          .with(user: recipient.user, season: season)
+          .with(user: recipient.user, season: season, recipient: recipient)
           .send_reminder
           .deliver_now
       end
