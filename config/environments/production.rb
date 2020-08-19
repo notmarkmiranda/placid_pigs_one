@@ -62,9 +62,9 @@ Rails.application.configure do
 
   config.action_mailer.perform_caching = false
   config.action_mailer.delivery_method = :smtp
-  config.action_mailer.default_url_options = {host: "https://placid-pigs.herokuapp.com"}
+  config.action_mailer.default_url_options = {host: "https://www.pickwinners.app"}
   config.action_mailer.smtp_settings = {
-    domain: "https://placid-pigs.herokuapp.com",
+    domain: "https://www.pickwinners.app",
     address: "smtp.sendgrid.net",
     port: 587,
     authentication: :plain,

@@ -16,6 +16,10 @@ module DateHelper
   end
 
   def today
-    formatted_date_with_day(DateTime.now.in_time_zone("America/Denver").to_date)
+    DateTime.now.in_time_zone("America/Denver").to_date
+  end
+
+  def today_with_day
+    formatted_date_with_day(today)
   end
 end
