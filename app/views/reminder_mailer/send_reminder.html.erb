@@ -2,6 +2,6 @@
 
 <p>Your picks for the next <%= pluralize(@season.increment_lock, 'day') %> for <%= @season.name %> are due tomorrow!</p>
 
-<p>Set them <%= link_to "here", @season_url %>!</p>
+<p>Set them <%= link_to "here", season_url(id: @season.id) %>!</p>
 
-<p>If you want to unsubscribe from this email, my bad. I don't have that functionality built yet.</p>
+<p><%= link_to "Click here", unsubscribe_url(token: @recipient.unsubscribe_token) %> to unsubscribe, but you won't get any reminders about picks and will probably lose.</p>
