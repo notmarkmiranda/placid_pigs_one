@@ -27,10 +27,9 @@ class Pick < ApplicationRecord
   end
 
   def winner_css
-    winner = Winner.find_by(team_id: team_id, date: date)
-    if winner&.winner?
+    if winner?
       "winner"
-    elsif winner&.loser?
+    elsif loser?
       "loser"
     end
   end
