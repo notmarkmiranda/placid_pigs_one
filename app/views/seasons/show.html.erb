@@ -103,7 +103,8 @@
             </tr>
           <% end %>
           <tr colspan="3">
-            <td><%= link_to "View all picks", picks_path(season_id: @season) %></td>
+            <td><%= link_to "View my picks", picks_path(season_id: @season) %></td>
+            <td><%= link_to "View everyone's picks", picks_path(season_id: @season, view_all: "true") %></td>
           </tr>
         </table>
       </div>
