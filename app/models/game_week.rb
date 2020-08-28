@@ -12,12 +12,20 @@ class GameWeek < ApplicationRecord
     start_date.to_datetime.change(hour: 16).in_time_zone("America/Denver")
   end
 
+  def date_count
+    (end_date - start_date).to_i + 1
+  end
+
   def locked?
     DateTime.now.in_time_zone("America/Denver") > cutoff_time
   end
 
+  def previous
+    season.game_weeks.find_by(end_date: start_date.yesterday)
+  end
+
   def rowspan
-    (end_date - start_date + 2).to_i
+    date_count + 1
   end
 
   def self.by_date(season, date)
