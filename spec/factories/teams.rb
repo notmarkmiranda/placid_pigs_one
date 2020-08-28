@@ -1,7 +1,7 @@
 FactoryBot.define do
   factory :team do
-    city { "Los Angeles" }
-    name { "Dodgers" }
-    abbreviation { "LAD" }
+    sequence(:city) { |n| "Los Angeles#{n}" }
+    sequence(:name) { |n| "Dodgers#{n}" }
+    sequence(:abbreviation) { |n| "LAD#{n}" }
   end
 end
