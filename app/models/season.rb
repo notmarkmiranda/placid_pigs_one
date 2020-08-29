@@ -18,6 +18,18 @@ class Season < ApplicationRecord
     (end_date - today).to_i + 1 if end_date > today
   end
   
+  def full_stats_standings(limit = nil)
+    users = standings(limit)
+    users.map do |user|
+      all_picks = user.picks.where(game_week: game_weeks)
+      total_pick_count = all_picks.where.not(status: nil).count
+      nil_pick_count = all_picks.where(status: nil).where('date < ?', today).count
+      user.total_pick_count = total_pick_count
+      user.nil_pick_count = nil_pick_count
+      user
+    end
+  end
+
   def league_name
     league.name
   end
@@ -38,21 +50,13 @@ class Season < ApplicationRecord
   end
 
   def standings(limit = nil)
-    users = User
+    User
       .joins(:picks)
       .where(picks: {status: :winner, game_week: game_weeks})
       .select("users.*, count(picks.id) as pick_count")
       .group("users.id")
       .order("count(picks.id) DESC")
-      .limit(limit)
-    users.map do |user|
-      all_picks = user.picks.where(game_week: game_weeks)
-      total_pick_count = all_picks.where.not(status: nil).count
-      nil_pick_count = all_picks.where(status: nil).where('date < ?', today).count
-      user.total_pick_count = total_pick_count
-      user.nil_pick_count = nil_pick_count
-      user.decorate
-    end
+      .limit(limit).decorate
   end
 
   def player_count
