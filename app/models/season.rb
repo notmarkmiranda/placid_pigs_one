@@ -48,7 +48,7 @@ class Season < ApplicationRecord
     users.map do |user|
       all_picks = user.picks.where(game_week: game_weeks)
       total_pick_count = all_picks.where.not(status: nil).count
-      nil_pick_count = all_picks.where(status: nil).count
+      nil_pick_count = all_picks.where(status: nil).where('date < ?', today).count
       user.total_pick_count = total_pick_count
       user.nil_pick_count = nil_pick_count
       user.decorate
