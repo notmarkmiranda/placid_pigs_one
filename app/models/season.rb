@@ -28,7 +28,7 @@ class Season < ApplicationRecord
   end
 
   def points_for_user(user)
-    standings.find(user.id).pick_count
+    standings.find { |u| u.id == user.id }.pick_count
   end
 
   def position_for_current_user(user)
