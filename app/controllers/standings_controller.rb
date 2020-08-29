@@ -2,6 +2,6 @@ class StandingsController < ApplicationController
   def show
     @season = Season.find(params[:id])
     authorize(@season)
-    @standings = @season.standings.decorate
+    @standings = @season.standings
   end
 end

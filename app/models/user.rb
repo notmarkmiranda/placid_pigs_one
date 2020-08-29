@@ -4,6 +4,7 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
     :recoverable, :rememberable, :validatable
 
+  attr_accessor :total_pick_count, :nil_pick_count 
   has_many :leagues
   has_many :seasons, through: :leagues
   has_many :memberships

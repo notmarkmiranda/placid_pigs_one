@@ -9,12 +9,14 @@
         <th>Place</th>
         <th>Person</th>
         <th>Points</th>
+        <th>Stats</th>
       </tr>
       <% @standings.each_with_index do |standing, index| %>
         <tr class="<%= standing.is_current_user?(current_user) %>">
           <td><%= index + 1 %></td>
           <td><%= standing.identifier %></td>
           <td><%= standing.pick_count %></td>
+          <td><%= standing.stats %></td>
         </tr>
       <% end %>
     </table>

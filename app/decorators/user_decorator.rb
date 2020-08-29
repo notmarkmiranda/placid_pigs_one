@@ -14,4 +14,19 @@ class UserDecorator < ApplicationDecorator
   def is_current_user?(user)
     "bg-dark text-white" if object == user
   end
+
+  def stats
+    [
+      "#{user.pick_count} / #{user.total_pick_count} ",
+      "- #{percentage_helper(user.pick_count/user.total_pick_count.to_f)} ",
+      "<br />#{h.pluralize(user.nil_pick_count, "pending pick")}"
+    ].join.html_safe
+    
+  end
+
+  private
+
+  def percentage_helper(number)
+    h.number_to_percentage((number * 1000).floor / 10.0, precision: 1)
+  end
 end

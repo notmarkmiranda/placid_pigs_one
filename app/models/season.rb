@@ -38,13 +38,21 @@ class Season < ApplicationRecord
   end
 
   def standings(limit = nil)
-    User
+    users = User
       .joins(:picks)
       .where(picks: {status: :winner, game_week: game_weeks})
       .select("users.*, count(picks.id) as pick_count")
       .group("users.id")
       .order("count(picks.id) DESC")
       .limit(limit)
+    users.map do |user|
+      all_picks = user.picks.where(game_week: game_weeks)
+      total_pick_count = all_picks.where.not(status: nil).count
+      nil_pick_count = all_picks.where(status: nil).count
+      user.total_pick_count = total_pick_count
+      user.nil_pick_count = nil_pick_count
+      user.decorate
+    end
   end
 
   def player_count
