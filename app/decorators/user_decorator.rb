@@ -16,9 +16,11 @@ class UserDecorator < ApplicationDecorator
   end
 
   def stats
+    percentage = user.total_pick_count.zero? ? 0.0 : user.pick_count / user.total_pick_count.to_f
+
     [
       "#{user.pick_count} / #{user.total_pick_count} ",
-      "- #{percentage_helper(user.pick_count/user.total_pick_count.to_f)} ",
+      "- #{percentage_helper(percentage)} ",
       "<br />#{h.pluralize(user.nil_pick_count, "pending pick")}"
     ].join.html_safe
     
