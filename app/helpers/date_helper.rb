@@ -22,4 +22,8 @@ module DateHelper
   def today_with_day
     formatted_date_with_day(today)
   end
+
+  def updated_time(date)
+    "#{formatted_date(date)} at #{date.strftime('%l:%M %p')}"
+  end
 end

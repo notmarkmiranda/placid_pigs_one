@@ -8,6 +8,7 @@
     <% end %>
   </div>
   <div class="table-responsive">
+    <p class="text-muted small">last updated <%= Pick.last_updated %></p>
     <table class="table table-sm">
       <tr>
         <th>Week</th>
@@ -35,11 +36,7 @@
           <% game_week.all_dates.each do |date| %>
           <tr>
             <td>
-              <% if params[:view_all] == "true" %>
-                <%= short_date(date) %>
-              <% else %>
-                <%= formatted_date_with_day(date) %>
-              <% end %>
+              <%= short_date(date) %>
             </td>
             <% pick = @picks.find_by(date: date) %>
             <% if pick %>

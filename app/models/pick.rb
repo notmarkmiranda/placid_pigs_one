@@ -18,6 +18,12 @@ class Pick < ApplicationRecord
     end
   end
 
+  def self.last_updated
+    pick = Pick.order(updated_at: :desc).limit(1).first
+    return unless pick
+    pick.decorate.last_updated_date_and_time
+  end
+
   def team_full_name
     team.decorate.full_name
   end
