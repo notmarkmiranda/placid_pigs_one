@@ -1,11 +1,13 @@
 class SeasonsController < ApplicationController
+  include DateHelper
+
   before_action :authenticate_user!
 
   def show
     @season = Season.find(params[:id]).decorate
     authorize @season
-    today = DateTime.now.in_time_zone("America/Denver").to_date
-    @current_week = (today..(today + 7.days)).to_a
+    end_date = determine_end_date
+    @current_week = (today..end_date).to_a
     @all_picks = Pick.where(game_week_id: @season.game_weeks.map(&:id))
   end
 
@@ -50,6 +52,11 @@ class SeasonsController < ApplicationController
   end
 
   private
+
+  def determine_end_date
+    max_end_date = today + @season.increment_lock.days
+    max_end_date > @season.end_date ? @season.end_date : max_end_date
+  end
 
   def season_params
     params.require(:season).permit(:name, :active, :league_id, :start_date, :end_date, :increment_lock, :offset)

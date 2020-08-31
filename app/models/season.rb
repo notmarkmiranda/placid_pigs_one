@@ -6,8 +6,7 @@ class Season < ApplicationRecord
   validates_presence_of :name
   validates_uniqueness_of :name, scope: :league_id
   validates_presence_of :start_date
-  validates_presence_of :end_date
-
+  validates_presence_of :end_date 
   after_create_commit :create_game_weeks
 
   def all_dates
