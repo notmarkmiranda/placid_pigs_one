@@ -3,6 +3,7 @@
     <%= link_to "Back to League", @season.league, class: "btn btn-outline-primary btn-sm" %>
     <% if policy(@season).destroy? %>
       <%= button_to "Delete Season", @season, method: :delete, class: "btn btn-outline-danger btn-sm" %>
+      <%= button_to "Finalize Season", @season, method: :put, class: "btn btn-outline-info btn-sm", params: { season: { active: false } } %>
     <% end %>
   </div>
   <h4><%= @season.name %></h4>
@@ -71,27 +72,30 @@
                 <% if pick %>
                   <div class="<%= pick.winner_css %> existing_pick nowrap">
                     <span><%= pick.team.decorate.full_name %></span>
-                    <% unless week.locked? %>
+                    <% unless (week.locked? || !@season.active?)%>
                       <%= button_to pick, method: :delete, class: "btn btn-outline-danger", form_class: "delete_pick" do %>
                         <%= fa_icon "times fw" %>
                       <% end %>
                     <% end %>
                   </div>
                 <% else %>
-                  <% if week.locked? %>
-                    Cutoff has passed. No pick.
-                  <% else %>
-                    <%= form_for Pick.new, html: { class: 'new-pick'  } do |f| %>
-                      <%= f.hidden_field :game_week_id, value: week.id %>
-                      <%= f.hidden_field :date, value: date %>
-                      <div class="form-group select-new-pick">
-                        <%= f.collection_select(:team_id, Team.all.decorate, :id, :full_name, {include_blank: true}, {class: "form-control"}) %>
-                        <%= button_tag class: "btn btn-outline-primary" do %>
-                          <%= fa_icon "check fw" %>
-                        <% end %>
-                      </div>
+                  <% if @season.active? %>
+                    <% if week.locked? %>
+                      Cutoff has passed. No pick.
+                    <% else %>
+                      <%= form_for Pick.new, html: { class: 'new-pick'  } do |f| %>
+                        <%= f.hidden_field :game_week_id, value: week.id %>
+                        <%= f.hidden_field :date, value: date %>
+                        <div class="form-group select-new-pick">
+                          <%= f.collection_select(:team_id, Team.all.decorate, :id, :full_name, {include_blank: true}, {class: "form-control"}) %>
+                          <%= button_tag class: "btn btn-outline-primary save-pick" do %>
+                            <%= fa_icon "check fw" %>
+                          <% end %>
+                        </div>
+                      <% end %>
                     <% end %>
                   <% end %>
+
                 <% end %>
               </td>
 
