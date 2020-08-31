@@ -1,6 +1,8 @@
+require 'copy_paste_picks'
+
 desc "Copy Pasta Picks"
 task copy_pasta_picks: :environment do
   include DateHelper
 
-  CopyPastaPicks.vamonos(today)
+  CopyPastePicks.vamonos(today)
 end
